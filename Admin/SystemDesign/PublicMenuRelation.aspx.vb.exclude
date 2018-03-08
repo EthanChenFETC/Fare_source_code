@@ -1,0 +1,32 @@
+﻿Imports System.Data
+Imports System.Data.SqlClient
+
+Partial Class SystemDesign_PublicUserRelation
+    Inherits PageBase
+
+
+    ''' <summary>
+    ''' 更新-單位的下屬單位設定
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Protected Sub btbSubmit_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btbSubmit.Click
+        Dim NewNode As String = "1390,1412,1414,1418,1420,1422,1424,1426,1428,1434,1436,1438,1450,1458,1460,1462,1464,1466,1468,1470,1472,1492,1494,151,1518,1524,1526,1528,1530,1532,1548,1550,1552,1554,1556,1558,1560,1562,1564,1566,1568,1570,1572,1574,1576,1586,1588,159,1612,1622,1626,1628,1630,1632,1634,1636,1638,1640,1644,1648,1650,1652,1654,1668,1670,1674,1682,1684,1686,1708,1728,1730,1732,1734,1736,1738,1742,1744,1746,1748,1754,1756,1758,1760,1762,1764,1766,1768,1770,1772,1774,1776,1778,1780,1782"
+        Dim OldNode As String = "1058,101,83,107,103,922,920,546,1316,682,1044,1042,145,159,556,1364,163,800,1192,165,762,1314,1316,1180,77,992,1194,120,1212,1208,844,560,562,564,958,586,588,572,574,590,998,566,592,594,568,1016,582,584,1056,888,880,992,996,882,718,720,892,894,896,898,902,900,904,1330,1334,1056,742,744,746,1208,1086,1096,864,866,828,664,830,668,832,834,1326,836,906,922,932,908,910,914,920,912,916,690,692,155,552"
+        Dim nNode() As String = NewNode.Split(",")
+        Dim oNode() As String = OldNode.Split(",")
+        For i As Integer = 0 To nNode.Length - 1
+            Dim NodeID As Integer = oNode(i)
+            Dim dt As DataTable = ClassDB.RunReturnDataTable("Select * from PublicationMenuRelation where NodeID =@NodeID  order by PublicID", New SqlParameter("@NodeID", oNode(i)))
+            For j As Integer = 0 To dt.Rows.Count - 1
+                ClassDB.UpdateDB("Insert into PublicationMenuRelation (PublicID, NodeID) values(" & dt.Rows(j)("PublicID") & "," & nNode(i) & ")")
+            Next
+        Next
+    End Sub
+    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        'If Session("EditKey") Is Nothing Then
+        '    Me.btbSubmit.Visible = False
+        'End If
+    End Sub
+End Class

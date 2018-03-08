@@ -1,0 +1,129 @@
+﻿<%@ Master Language="VB" CodeFile="MasterPage.master.vb" Inherits="MasterPage" %>
+<%@ Register Src="common/Footer.ascx" TagName="Footer" TagPrefix="uc1" %>
+<%@ Register Src="common/Header.ascx" TagName="Header" TagPrefix="uc2" %>
+<%@ Register TagPrefix="blocks" TagName="Styles" Src="~/common/styles.ascx" %>
+<%@ Register TagPrefix="ComponentArt" Namespace="ComponentArt.Web.UI" Assembly="ComponentArt.Web.UI" %>
+<%@ Register Assembly="Microsoft.Web.Preview" Namespace="Microsoft.Web.Preview.UI.Controls"  TagPrefix="cc1" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>管理系統</title>
+
+    <blocks:Styles ID="Styles" runat="server"></blocks:Styles>
+    
+    <link href="~/Report/ReportView.css" type="text/css" rel="stylesheet" />
+    <link href="~/Report/ReportView2.css" type="text/css" rel="stylesheet" media="print" />
+    <link href="~/Report/render.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript">
+    //<![CDATA[
+      function Picker1_onSelectionChanged(sender, eventArgs)
+      {
+        Calendar1.setSelectedDate(Picker1.getSelectedDate());
+      }
+      function Calendar1_onSelectionChanged(sender, eventArgs)
+      {
+        Picker1.setSelectedDate(Calendar1.getSelectedDate());
+      }
+    //]]>
+    </script>
+
+</head>
+
+<%--<script>
+     history.forward(); //(20080225mw)
+</script>--%>
+<cc1:History ID="History1" runat="server" onnavigate="History1_Navigate"  ></cc1:History>
+<body><asp:Label ID="lblrender" runat="server"></asp:Label>
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>
+        <asp:UpdateProgress ID="UpdateProgress1" runat="server" DisplayAfter="250">
+            <ProgressTemplate>
+                <div class="UpdateProgress">
+                    <asp:Image ID="Image1" runat="server" ImageUrl="~/common/Template2/images/loading2.gif" />&nbsp;</div>
+            </ProgressTemplate>
+        </asp:UpdateProgress>
+        <!-- Headr Area -->
+        <div id="DemoAreaHeader">
+            <div id="LoginInfo">
+                <uc2:Header ID="Header1" runat="server" />
+                &nbsp;</div>
+        </div>
+        <!-- AdminMenu Area UserControl -->
+        <div class="TopMenuGroup">
+            <ComponentArt:Menu ID="Menu1" runat="server" TopGroupItemSpacing="0px" ScrollDownLookId="DefaultItemLook"
+                ScrollUpLookId="DefaultItemLook" CssClass="TopMenuGroup" DefaultGroupCssClass="MenuGroup"
+                DefaultItemLookId="DefaultItemLook" DefaultGroupItemSpacing="0px" CollapseSlide="None"
+                ExpandDelay="100" ExpandTransition="Fade" CollapseTransition="Fade" AutoPostBackOnSelect="true">
+                <ItemLooks>
+                    <ComponentArt:ItemLook CssClass="TopMenuItem" LookId="TopItemLook" LabelPaddingLeft="25px"
+                        LabelPaddingBottom="4px" LabelPaddingRight="25px" LabelPaddingTop="4px" HoverCssClass="TopMenuItemHover">
+                    </ComponentArt:ItemLook>
+                    <ComponentArt:ItemLook CssClass="MenuItem" LookId="DefaultItemLook" LabelPaddingLeft="25px"
+                        LabelPaddingBottom="4px" LabelPaddingRight="12px" LabelPaddingTop="4px" HoverCssClass="MenuItemHover"
+                        LeftIconWidth="7px" ExpandedCssClass="MenuItemHover"></ComponentArt:ItemLook>
+                    <ComponentArt:ItemLook CssClass="MenuBreak" LookId="BreakItem"></ComponentArt:ItemLook>
+                </ItemLooks>
+            </ComponentArt:Menu>
+        </div>
+        <!-- Content Area -->
+        <div id="DemoAreaContent">
+            <div id="Navbar">
+                <asp:LinkButton ID="lkbHome" runat="server" OnClick="lkbHome_Click" CausesValidation="False">系統首頁</asp:LinkButton>
+                <asp:Literal ID="AdminNavBar" runat="server"></asp:Literal>
+                <div id="Panel_AdminTab_Outline">
+                    <ComponentArt:TabStrip ID="TabStrip1" CssClass="TopGroup" DefaultItemLookId="DefaultTabLook"
+                        DefaultSelectedItemLookId="SelectedTabLook" DefaultDisabledItemLookId="DisabledTabLook"
+                        DefaultGroupTabSpacing="1" ImagesBaseUrl="~/common/Template2/images/" AutoPostBackOnSelect="true"
+                        runat="server">
+                        <ItemLooks>
+                            <ComponentArt:ItemLook LookId="DefaultTabLook" CssClass="DefaultTab" HoverCssClass="DefaultTabHover"
+                                LabelPaddingLeft="10" LabelPaddingRight="10" LabelPaddingTop="5" LabelPaddingBottom="4"
+                                LeftIconUrl="tab_left_icon.gif" RightIconUrl="tab_right_icon.gif" HoverLeftIconUrl="hover_tab_left_icon.gif"
+                                HoverRightIconUrl="hover_tab_right_icon.gif" LeftIconWidth="3" LeftIconHeight="21"
+                                RightIconWidth="3" RightIconHeight="21" />
+                            <ComponentArt:ItemLook LookId="SelectedTabLook" CssClass="SelectedTab" LabelPaddingLeft="10"
+                                LabelPaddingRight="10" LabelPaddingTop="4" LabelPaddingBottom="4" LeftIconUrl="selected_tab_left_icon.gif"
+                                RightIconUrl="selected_tab_right_icon.gif" LeftIconWidth="3" LeftIconHeight="21"
+                                RightIconWidth="3" RightIconHeight="21" />
+                            <ComponentArt:ItemLook LookId="DisabledTabLook" CssClass="DisabledTab" LabelPaddingLeft="10"
+                                LabelPaddingRight="10" LabelPaddingTop="4" LabelPaddingBottom="4" LeftIconUrl="selected_tab_left_icon.gif"
+                                RightIconUrl="selected_tab_right_icon.gif" LeftIconWidth="3" LeftIconHeight="21"
+                                RightIconWidth="3" RightIconHeight="21" />
+                        </ItemLooks>
+                    </ComponentArt:TabStrip>
+                </div>
+            </div>
+            <div class="Blockbody">
+                <div id="UserArea">
+                    <table cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                         
+                            <td valign="top" id="tdContent" runat="server" width="100%">
+                                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                                </asp:ContentPlaceHolder>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="Footer">
+                    <uc1:Footer ID="Footer1" runat="server" />
+                </div>
+            </div>
+        </div>
+        <br />
+        <asp:GridView ID="GridView1" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None"
+            Width="100%" CssClass="DgPermissions">
+            <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+            <RowStyle BackColor="#EFF3FB" />
+            <EditRowStyle BackColor="#2461BF" />
+            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+            <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+            <AlternatingRowStyle BackColor="White" />
+        </asp:GridView>
+    </form>
+</body>
+</html>
+<!--#include file="Calendar_General.js"-->

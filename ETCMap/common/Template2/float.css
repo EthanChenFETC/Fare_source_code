@@ -1,0 +1,149 @@
+/* CSS Document */
+#float_function{
+	position:absolute;
+	z-index:999;
+	background-color:#FFFFFF;
+	margin-left:auto;
+	margin-right:auto;
+	width: 60%;
+	height: 400px;
+	left:20%;
+	right:20%;
+	padding: 15px;
+	padding-top:8px;
+	color:#666;
+	border-top-width: 1px;
+	border-right-width: 2px;
+	border-bottom-width: 2px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #666666;
+	border-right-color: #666666;
+	border-bottom-color: #666666;
+	border-left-color: #666666;
+	background-image: url(images/float_top_bg.gif);
+	background-repeat: repeat-x;
+	background-position: top;
+	overflow:auto;
+}
+#float_bg{
+	position:absolute;
+	z-index:800;
+	width: 100%;
+/*	min-height:100%;
+	height:100%;
+	height:1250px;  */
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+	margin: 0;
+	padding: 0;
+	filter: alpha(opacity=30);
+	opacity: 0.3;
+	background-color:transparent !important;
+	background-color:#333333;
+	/*
+	background-image/**: url("images/maskBG.png") !important; // For browsers Moz, Opera, etc.
+	background-image:none;
+	background-repeat: repeat; */
+}
+.float_title{
+	color:#fff;
+}
+
+.float_single_txt{
+	width:98%;
+}
+.float_multi_txt{
+	width:98%;
+}
+#popupMask 
+{
+	position: absolute;
+	z-index: 200;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	opacity: .4;
+	filter: alpha(opacity=40);
+	/* this hack is so it works in IE
+	 * I find setting the color in the css gives me more flexibility 
+	 * than the PNG solution.
+	 */
+	background-color:transparent !important;
+	background-color: #333333;
+	/* this hack is for opera support
+	 * you can uncomment the background-image if you don't care about opera.
+	 * this gives you the flexibility to use any bg color that you want, instead of the png
+	 */
+	background-image/**/: url("../images/common/maskBG.png") !important; // For browsers Moz, Opera, etc.
+	background-image:none;
+	background-repeat: repeat;
+}
+
+.label {	
+	text-align:left;
+	margin: 0px;
+	background-image: url(images/lable_bg_line2.gif);
+	background-repeat: repeat-x;
+	height: 25px;
+	width: 100%;
+	margin-right: auto;
+	margin-left: auto;
+	}
+.label ul{
+	list-style: none;
+	margin-top: 1px;
+	margin-left: 0px;
+	margin-right: 1px;
+	padding: 0;
+}
+.label li{
+	text-decoration:none;
+	width: 150px;
+	height: 15px;
+	float: left;
+	display: block;
+	margin-bottom: -6px;	
+}
+
+.label .active {
+	background-image:url(images/Lable_Active2.gif);
+	background-repeat: no-repeat;	
+	width: 150px;
+	height: 17px;
+	float: left;
+	display: block;
+	margin-right: 1px;
+	margin-bottom: 0px;
+	padding: 0px;
+	text-align:left;
+	text-indent:30px;
+	padding-top: 8px;
+	text-decoration:none;
+	color:#3399FF;
+}
+
+.label .idle {
+	background-image:url(images/Lable2.gif);
+	background-repeat: no-repeat;	
+	width: 150px;
+	height: 16px;
+	float: left;
+	display: block;
+	margin-right: 1px;
+	margin-bottom: 0px;
+	padding: 0px;
+	text-align:left;
+	text-indent:30px;
+	padding-top: 8px;
+	text-decoration:none;
+	color:#666666;
+}
+
+

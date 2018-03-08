@@ -1,0 +1,216 @@
+﻿.PanelControlScedhule
+{
+ margin:auto;   
+}
+.PanelOutlineScedhule
+{
+ margin:auto;  
+}
+
+.PanelControl
+{
+ width:18cm;
+ margin:auto;   
+}
+.PanelOutline
+{
+ width:18cm;
+ margin:auto;  
+}
+.Gv2{
+	border: 1px solid #000;
+	margin-top: 10px;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+.Gv2 td, .Gv tr
+{
+    background-color:Green;
+    border: 1px solid #000;
+}
+.Gv2 a:link, .Gv a:visited {
+	color: #6699CC;
+	text-decoration: none;
+}
+.Gv2 a:hover{
+	color: #48D5C4;
+}
+.Gv{
+	border: 1px solid #000;
+	margin-top: 10px;
+	width: 18cm;
+	margin-left: auto;
+	margin-right: auto;
+}
+.Gv td, .Gv tr
+{
+    background-color:Green;
+    border: 1px solid #000;
+}
+.Gv a:link, .Gv a:visited {
+	color: #6699CC;
+	text-decoration: none;
+}
+.Gv a:hover{
+	color: #48D5C4;
+}
+.GvPager
+{
+    display:none;
+	
+}
+.GvPager a:before, .GvPager span:before {
+	content: "P."
+}
+.GvPager a:link, .GvPager a:visited {
+	margin: 0px;
+	padding: 1px 3px;
+	background-color:#EFEFEF;
+	color:#666666;
+	height: 10px;
+	width: 12px;
+}
+.GvPager a:hover {
+	margin: 0px;
+	padding: 1px 3px;
+	background-color:#ff0000;
+	color:#ffffff;
+	height: 10px;
+	width: 12px;
+}
+.GvPager span {
+	margin: 0px;
+	padding: 1px 3px;
+	background-color:#D2F7FF;
+	color:#0066CC;
+	height: 10px;
+	width: 12px;
+}
+.GvPager .PageInfo {
+	margin: 1px;
+	padding: 1px 3px;
+	background-color:#efefef;
+	color:#666666;
+	height: 10px;
+	width: 99%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+.GvHeader{
+	border-top: 1px solid #fff;
+	background-color:#fff;
+	height: 25px;
+	color: #000000;
+	text-align: left;
+}
+.GvHeader a{
+	color: #666666;
+}
+
+.GvAltItem
+{
+    border: 1px solid #000;
+	background-color:#fff;
+	height: 25px;
+	color: #000;
+	text-align: left;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+.GvAltItem:hover {
+	background-color:#EEF9FF;
+	color: #222222;
+}
+.GvItem
+{
+    border: 1px solid #000;
+	padding-left:5px;
+	background-color:#fff;
+	height: 25px;
+	color: #000;
+	text-align: left;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+.GvItem:hover {
+	background-color:#EEF9FF;
+	color: #222222;
+}
+.GvFooter{
+	background-color:#ececec;
+	height: 28px;
+	color: #333333;
+	text-align: left;
+	text-indent: 5px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.TableTitle
+{
+    font-family: "標楷體", Verdana, Arial, Helvetica, sans-serif;
+    font-size:2.5em;
+    font-weight:bolder;
+    text-align:center;
+    margin-top:0px;
+}
+
+.TableSubject
+{
+    font-family: "標楷體", Verdana, Arial, Helvetica, sans-serif;
+    font-size:medium;
+    text-align:center;
+}
+
+.TotalCountRow
+{
+    font-weight:bold;
+}
+
+
+.PrintInfo
+{
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size:xx-small;
+  margin-top: 6px; 
+  text-align:left;
+}
+.PrintInfoBreak
+{
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size:xx-small;
+  margin-top: 6px; 
+  text-align:left;
+  page-break-after:always;  
+}
+
+/*以下很重要由於Sreen中為Absolutly無法分頁*/
+.Blockbody
+{
+    position:relative;	
+    margin:0;
+    padding:0;
+    top:0;
+    border:0;
+}
+#DemoAreaContent
+{
+    position:relative;	
+    margin:0;
+    padding:0;
+    top: 0;
+    border:0;
+}
+
+#DemoAreaHeader, #LoginInfo,.PanelControlScedhule,.PanelOutlineScedhule, .TopMenuGroup, #Navbar, .PanelControl, .Footer, #ctl00_UpdateProgress1, .UpdateProgress
+{
+    display:none;
+    border:0;
+}
+#DemoAreaHeader, #Navbar, #LoginInfo
+{
+    margin:0;
+    padding:0;
+    height:0;
+    margin-top:0;
+    border:0;
+}

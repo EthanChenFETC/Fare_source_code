@@ -1,0 +1,108 @@
+﻿Imports System.Data
+Imports System.Data.SQLClient
+Partial Class Fare_CalculatorOpinion
+    Inherits InjectionPage
+    Dim SiteID As String = CInt(ConfigurationManager.AppSettings("SiteID").ToString)
+    'Dim Injection As Sql_Injection = New Sql_Injection
+    'Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    '    If Not IsPostBack Then
+    '    End If
+    'End Sub
+    Protected Sub InsertButton_Click_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles InsertButton_Click.Click
+        Try
+            If txtValidateCode.Text.ToString.ToLower <> CStr(Session("CheckCode")).ToString.ToLower Then
+                ModuleMisc.AlertMsg(Page, "所填寫的驗證碼與所給的不符")
+                Me.txtValidateCode.Text = ""
+                Me.txtValidateCode.Focus()
+
+                Exit Sub
+            Else
+                Dim sql As String = "" 'CInt(SiteID).ToString & ", '" & RemoveSqlInjection(Me.FullNameTextBox.Text) & "', '" & RemoveSqlInjection(Me.EmailTextBox.Text) & "','" & RemoveSqlInjection(TelPhone2TextBox.Text) & "','" & RemoveSqlInjection(LetterContentTextBox.Text)
+                'sql = "Insert into HWListOpinion(SiteID, FullName, Email, Phone, Contents, PostDateTime, UpdateDateTime) values(" & sql & "', getdate(), getdate())"
+                sql = "Insert into HWListOpinion(SiteID, FullName, Email, Phone, Contents, PostDateTime, UpdateDateTime) values(@SiteID, @FullName, @Email, @Phone, @Contents, getdate(), getdate())"
+                Dim Content As SqlParameter = New SqlParameter
+                Content.ParameterName = "@Content"
+                Content.SqlDbType = SqlDbType.NText
+                Content.Value = LetterContentTextBox.Text
+                ClassDB.UpdateDBText(sql, New SqlParameter("@SiteID", SiteID),
+                                 New SqlParameter("@FullName", RemoveSqlInjection(Me.FullNameTextBox.Text)),
+                                 New SqlParameter("@Email", RemoveSqlInjection(Me.EmailTextBox.Text)),
+                                 New SqlParameter("@Phone", RemoveSqlInjection(TelPhone2TextBox.Text)),
+                                 Content)
+                SendMail()
+                'ModuleMisc.AlertMsg(Page, "感謝您的寶貴意見，我們將納入參考。")
+                'Response.Redirect("Default.aspx")
+                'Response.End()
+                Dim scripts As String = "alert('感謝您的寶貴意見，我們將納入參考。');document.location.href='Default.aspx';"
+                ScriptManager.RegisterClientScriptBlock(Me.Page, GetType(Page), "thanks", scripts, True)
+            End If
+        Catch ex As Exception
+            'ModuleMisc.AlertMsg(Page, "所填寫的驗證碼與所給的不符")
+            Me.txtValidateCode.Text = ""
+            Me.txtValidateCode.Focus()
+            Exit Sub
+        End Try
+
+    End Sub
+
+    ''' <summary>
+    ''' 發送啟動通知給使用者
+    ''' </summary>
+    ''' 
+    ''' <remarks></remarks>
+    Private Sub SendMail()
+        Dim Email As String = ConfigurationManager.AppSettings("MailTo").ToString
+        Dim MailBody As String = GetMailBody()
+
+        If MailBody <> Nothing Then
+            If MailBody.Length > 0 Then
+                MailSender.SendMail("遠通電收通行費試算意見反映", MailBody, Email, , , , True)
+            End If
+        End If
+
+
+    End Sub
+    ''' <summary>
+    ''' 取得信件主文
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function GetMailBody() As String
+        Dim Contents As String = ""
+        Contents += "<table class=""contents_font_01"" border=""0"" cellspacing=""0"" cellpadding=""2"" width=""100%"" > " & vbCrLf
+        Contents += "    <tbody>" & vbCrLf
+        Contents += "        <tr>" & vbCrLf
+        Contents += "            <td>主旨 Subject：</td>" & vbCrLf
+        Contents += "            <td>計程通行費試算-意見反映</td>" & vbCrLf
+        Contents += "        </tr>" & vbCrLf
+        Contents += "        <tr>" & vbCrLf
+        Contents += "            <td><span style=""color: #ff6600"">*</span>姓名 Full Name：</td>" & vbCrLf
+        Contents += "            <td><input style=""width: 250px"" id=""ctl00_CPHolder1_FullNameTextBox"" maxlength=""30"" disabled=""disabled"" name=""ctl00$CPHolder1$FullNameTextBox"" type=""text"" value=""" & Me.FullNameTextBox.Text & """ /></td>" & vbCrLf
+        Contents += "        </tr>" & vbCrLf
+        Contents += "        <tr>" & vbCrLf
+        Contents += "            <td><span style=""color: #ff6600"">*</span>Email Address：</td>" & vbCrLf
+        Contents += "            <td><input style=""width: 450px"" id=""ctl00_CPHolder1_EmailTextBox2"" maxlength=""100"" disabled=""disabled"" name=""ctl00_CPHolder1_EmailTextBox"" type=""text"" value=""" & Me.EmailTextBox.Text & """ /></td>" & vbCrLf
+        Contents += "        </tr>" & vbCrLf
+        Contents += "        <tr>" & vbCrLf
+        Contents += "            <td><span style=""color: #ff6600"">*</span>電話 Phone：</td>" & vbCrLf
+        Contents += "            <td><input style=""width: 218px"" id=""ctl00_CPHolder1_TelPhone2TextBox2"" maxlength=""20"" disabled=""disabled"" name=""ctl00_CPHolder1_TelPhone2TextBox"" type=""text"" value=""" & Me.TelPhone2TextBox.Text & """ /> </td>" & vbCrLf
+        Contents += "        </tr>" & vbCrLf
+        Contents += "        <tr>" & vbCrLf
+        Contents += "            <td width=""1%"" nowrap=""nowrap"" valign=""top""><span style=""color: #ff6600"">*</span>意見內容 Letter Content：</td>" & vbCrLf
+        Contents += "            <td>" & Me.LetterContentTextBox.Text & vbCrLf
+        Contents += "                        </td>" & vbCrLf
+        Contents += "                    </tr>" & vbCrLf
+        Contents += "                </tbody>" & vbCrLf
+        Contents += "            </table>" & vbCrLf
+        Return Contents
+    End Function
+
+    Protected Sub InsertButton_Reset_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles InsertButton_Reset.Click
+        Me.FullNameTextBox.Text = ""
+        Me.EmailTextBox.Text = ""
+        Me.TelPhone2TextBox.Text = ""
+        Me.txtValidateCode.Text = ""
+        Me.LetterContentTextBox.Text = ""
+        Me.FullNameTextBox.Focus()
+    End Sub
+End Class

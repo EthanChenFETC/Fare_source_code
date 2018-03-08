@@ -1,0 +1,63 @@
+.TopMenuGroup
+{
+  background-image:url(images/top_group_background.gif);
+  background-color:#DBD7D0;
+  border:1px solid black; 
+}
+
+.TopMenuItem
+{
+  color:white;
+  font-family:Tahoma; 
+  font-size:11px; 
+  border:1px solid black; 
+  border-left-color:#737373;
+  border-top-color:#4C4C4C;
+  border-bottom-color:#131413;
+  cursor:default;
+}
+
+.TopMenuItemHover 
+{
+  color:white;
+  background-color:#3D3D3D; 
+  font-family:Tahoma; 
+  font-size:11px; 
+  border:1px solid black; 
+  border-bottom-color:#AAAAAA;
+  cursor:default;
+}
+
+
+.MenuGroup
+{
+  background-image:url(images/group_background.gif); 
+  background-color:#737373;
+  border:1px solid black; 
+}
+
+.MenuItem
+{
+  color:white;
+  font-family:Tahoma; 
+  font-size:11px; 
+  margin:1px;
+  cursor:default;
+}
+
+.MenuItemHover 
+{
+  background-color:#4488DE;
+  color:black; 
+  font-family:Tahoma; 
+  font-size:11px; 
+  border:1px solid #ACD1FF;
+  cursor:default;
+}
+
+.MenuBreak
+{
+  background-image:url(images/break.gif);
+  width:100%;
+  height:1px;
+}

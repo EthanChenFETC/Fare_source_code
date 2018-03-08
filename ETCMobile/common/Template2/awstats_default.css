@@ -1,0 +1,60 @@
+body { 
+	font: 11px verdana, arial, helvetica, sans-serif; 
+	background-color: #FFFFFF; 
+	margin-top: 0 
+}
+.aws_bodyl { 
+	background-image: url(/awstatsicons/other/backleft.png); 
+	background-repeat: repeat-y; 
+}
+.aws_border {
+	background-color: #FFF;
+	margin-top:5px;
+	/*padding: 1px 1px 1px 1px; 
+	margin-top: 0;*/
+	border: 1px dashed #AAA;	
+
+}
+.aws_title  { 
+	font: 13px verdana, arial, helvetica, sans-serif; 
+	font-weight: bold; 
+	background-color: #fff; 
+	text-align: left; 
+	margin-bottom: 0; 
+	padding-top: 10px;
+	padding-bottom: 5px;
+	padding-left: 10px;
+	color:#666;
+}
+.aws_blank { 
+	font: 13px verdana, arial, helvetica, sans-serif; 
+	background-color: #FFFFFF; 
+	text-align: center; 
+	margin-bottom: 0; 
+	padding: 1px 1px 1px 1px; 
+}
+.aws_data {
+	background-color: #FFFFFF;
+	margin:0;
+	padding:0;
+	border:0;
+}
+.aws_formfield { 
+	font: 13px verdana, arial, helvetica; 
+}
+.aws_button {
+	font-family: arial,verdana,helvetica, sans-serif;
+	font-size: 12px;
+	border: 1px solid #ccd7e0;
+	background-image: url(/awstatsicons/other/button.gif);
+}
+.ctooltip { 
+	position:absolute; 
+	top:0px; left:0px; 
+	z-index:2; width:380; 
+	visibility:hidden; 
+	font: 8pt MS Comic Sans,arial,sans-serif; 
+	background-color: #FFFFE6; 
+	padding: 8px; 
+	border: 1px solid black; 
+}

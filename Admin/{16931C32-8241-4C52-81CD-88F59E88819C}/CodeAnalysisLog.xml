@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="c:\program files (x86)\microsoft visual studio 14.0\team tools\static analysis tools\fxcop\Xml\CodeAnalysisReport.xsl"?>
+<FxCopReport Version="14.0">
+ <Localized>
+  <String Key="Category">分類</String>
+  <String Key="Certainty">確實性</String>
+  <String Key="CollapseAll">全部摺疊</String>
+  <String Key="CheckId">檢查 ID</String>
+  <String Key="Error">錯誤</String>
+  <String Key="Errors">錯誤</String>
+  <String Key="ExpandAll">全部展開</String>
+  <String Key="Help">說明</String>
+  <String Key="Line">行</String>
+  <String Key="Messages">訊息</String>
+  <String Key="LocationNotStoredInPdb">[位置未儲存在 PDB]</String>
+  <String Key="Project">專案</String>
+  <String Key="Resolution">解析度</String>
+  <String Key="Rule">規則</String>
+  <String Key="RuleFile">規則檔</String>
+  <String Key="RuleDescription">規則描述</String>
+  <String Key="Source">來源</String>
+  <String Key="Status">狀態</String>
+  <String Key="Target">目標</String>
+  <String Key="Warning">警告</String>
+  <String Key="Warnings">警告</String>
+  <String Key="ReportTitle">程式碼分析報告</String>
+ </Localized>
+ <Exceptions>
+  <Exception Keyword="CA0001" Kind="AssemblyLoad">
+   <Type>Microsoft.FxCop.Common.AssemblyLoadException</Type>
+   <ExceptionMessage>在組件 'System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' 中找不到類型 'System.Security.Authentication.ExtendedProtection.ChannelBinding'。</ExceptionMessage>
+   <StackTrace>   於 Microsoft.FxCop.Engines.Phoenix.LoadAndResolutionHandler.HandleFailureToFindTypeDefinitionByName(ModuleUnit unit, UInt32 typeRefToken, String name)
+   於 Phx.Metadata.LoaderImplementation.GetTypeReferenceSymbol(UInt32 typeReferenceToken)
+   於 Phx.Metadata.LoaderImplementation.GetSymbolByToken(UInt32 token)
+   於 Phx.Metadata.LoaderImplementation.GetTypeFromSignature(Byte*&amp; signature, TypeSymbol typeSpecificationSymbol, AggregateType variableAggregateType, FunctionSymbol variableFunctionSymbol)
+   於 Phx.Metadata.LoaderImplementation.MakeFunctionType(Byte*&amp; signature, TypeSymbol typeSymbol, AggregateType aggregateType, FunctionSymbol functionSymbol, UInt32 functionToken)
+   於 Phx.Metadata.LoaderImplementation.GetMethodDefinitionSymbol(UInt32 methodDefinitionToken)
+   於 Phx.Metadata.MetadataLoader.LoadTypeDefinitionMembers(TypeSymbol symbol)
+   於 Phx.Metadata.MetadataLoader.LoadMembers(Type type)
+   於 Microsoft.FxCop.Engines.Phoenix.AssemblyLoader.ProcessLoadingMembers(AggregateType type, RingModelExtension extension, MetadataLoader metadataLoader)
+   於 Microsoft.FxCop.Engines.Phoenix.AssemblyLoader.ProcessWorklist(MetadataLoader metadataLoader, Boolean ignoreErrors)
+   於 Microsoft.FxCop.Engines.Phoenix.AssemblyLoader.LoadAssembly(String filePath)
+   於 Microsoft.FxCop.Engines.Phoenix.PhoenixAnalysisEngine.AnalyzeInternal()
+   於 Microsoft.FxCop.Engines.Phoenix.PhoenixAnalysisEngine.Analyze()
+   於 Microsoft.FxCop.Common.EngineManager.Analyze(Project project, Boolean verboseOutput)</StackTrace>
+  </Exception>
+  <Exception Keyword="CA0001" Kind="Engine">
+   <Type>Microsoft.FxCop.Sdk.InvalidMetadataException</Type>
+   <ExceptionMessage>剖析以下方法的 IL 時發生錯誤: 'ConfigurationProviders.GetAppSetting(System.String)'，位移 '0x26' 處有 opcode 為 'Callvirt' 的指示。</ExceptionMessage>
+   <StackTrace>   於 Microsoft.FxCop.Sdk.ILParser.GetMemberFromToken()
+   於 Microsoft.FxCop.Sdk.InstructionParser.ParseInstruction()
+   於 Microsoft.FxCop.Sdk.InstructionParser.ParseInstructions()
+   於 Microsoft.FxCop.Sdk.Reader.ParseMethodInstructions(Method method, Int32 methodIndex, Int32 RVA)
+   於 Microsoft.FxCop.Sdk.Reader.GetMethodInstructions(Method method, Object i)
+   於 Microsoft.FxCop.Sdk.Reader.GetMethodBody(Method method, Object i, Boolean asInstructionList)
+   於 Microsoft.FxCop.Sdk.Method.get_Instructions()
+   於 Microsoft.FxCop.Sdk.RuleUtilities.HasImperativeSecurityAction(Method method, SecurityAction action)
+   於 Microsoft.FxCop.Sdk.RuleUtilities.HasSecurityAction(Method method, SecurityAction action)
+   於 Microsoft.FxCop.Sdk.RuleUtilities.HasSecurityAction(Method method, SecurityAction[] actions)
+   於 Microsoft.FxCop.Engines.Introspection.LoadVisitor.RecordCallSites(Method caller)
+   於 Microsoft.FxCop.Engines.Introspection.LoadVisitor.VisitMember(Member member, TargetMember target)
+   於 Microsoft.FxCop.Engines.Introspection.BaseVisitor.VisitMembers(MemberCollection members, TargetMemberDictionary targets, Boolean visitNestedTypes)
+   於 Microsoft.FxCop.Engines.Introspection.BaseVisitor.VisitType(TypeNode type, TargetType target)
+   於 Microsoft.FxCop.Engines.Introspection.LoadVisitor.VisitType(TypeNode type, TargetType target)
+   於 Microsoft.FxCop.Engines.Introspection.BaseVisitor.VisitTypes(TypeNodeCollection types, TargetNamespaceDictionary targets)
+   於 Microsoft.FxCop.Engines.Introspection.LoadVisitor.VisitModule(ModuleNode module, TargetModule target)
+   於 Microsoft.FxCop.Engines.Introspection.BaseVisitor.VisitAssembly(AssemblyNode assembly, TargetFile target)
+   於 Microsoft.FxCop.Engines.Introspection.LoadVisitor.VisitAssembly(AssemblyNode assembly, TargetFile target)
+   於 Microsoft.FxCop.Engines.Introspection.LoadVisitor.Load(TargetFile target, Boolean buildTree, Boolean queueItems, AssemblyNode loadedAssembly)
+   於 Microsoft.FxCop.Engines.Introspection.LoadVisitor.LoadAssemblies(Queue queue, ExceptionCollection exceptions)</StackTrace>
+   <InnerType>Microsoft.FxCop.Sdk.InvalidMetadataException</InnerType>
+   <InnerExceptionMessage>讀取模組 'App_Code' 時發生下列錯誤: 無法解析類型參考: [System.Xml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]System.Xml.DtdProcessing。</InnerExceptionMessage>
+   <InnerStackTrace>   於 Microsoft.FxCop.Sdk.Reader.HandleError(ModuleNode mod, String errorMessage)
+   於 Microsoft.FxCop.Sdk.Reader.GetDummyTypeNode(Identifier namesp, Identifier name, ModuleNode declaringModule, TypeNode declaringType, Boolean expectStruct)
+   於 Microsoft.FxCop.Sdk.Reader.GetTypeFromRef(Int32 i, Boolean expectStruct)
+   於 Microsoft.FxCop.Sdk.Reader.DecodeAndGetTypeDefOrRefOrSpec(Int32 codedIndex, Boolean expectStruct)
+   於 Microsoft.FxCop.Sdk.Reader.ParseTypeSignature(MemoryCursor sigReader, Boolean&amp; pinned, Boolean&amp; isTypeArgument)
+   於 Microsoft.FxCop.Sdk.Reader.ParseParameterTypes(TypeNodeCollection&amp; varArgTypes, MemoryCursor sigReader, Int32 paramCount, Boolean&amp; genericParameterEncountered)
+   於 Microsoft.FxCop.Sdk.Reader.GetMemberFromRef(Int32 i, TypeNodeCollection&amp; varArgTypes, Int32 numGenericArgs)
+   於 Microsoft.FxCop.Sdk.Reader.GetMemberFromToken(Int32 tok, TypeNodeCollection&amp; varArgTypes)
+   於 Microsoft.FxCop.Sdk.ILParser.GetMemberFromToken()</InnerStackTrace>
+  </Exception>
+  <Exception Keyword="CA0001" Kind="Engine">
+   <Type>Microsoft.FxCop.Sdk.FxCopException</Type>
+   <ExceptionMessage>分析組件時發生未處理的例外狀況: </ExceptionMessage>
+   <InnerType>Microsoft.FxCop.Sdk.InvalidMetadataException</InnerType>
+   <InnerExceptionMessage>剖析以下方法的 IL 時發生錯誤: 'ConfigurationProviders.GetAppSetting(System.String)'，位移 '0x26' 處有 opcode 為 'Callvirt' 的指示。</InnerExceptionMessage>
+   <InnerStackTrace>   於 Microsoft.FxCop.Sdk.ILParser.GetMemberFromToken()
+   於 Microsoft.FxCop.Sdk.InstructionParser.ParseInstruction()
+   於 Microsoft.FxCop.Sdk.InstructionParser.ParseInstructions()
+   於 Microsoft.FxCop.Sdk.Reader.ParseMethodInstructions(Method method, Int32 methodIndex, Int32 RVA)
+   於 Microsoft.FxCop.Sdk.Reader.GetMethodInstructions(Method method, Object i)
+   於 Microsoft.FxCop.Sdk.Reader.GetMethodBody(Method method, Object i, Boolean asInstructionList)
+   於 Microsoft.FxCop.Sdk.Method.get_Instructions()
+   於 Microsoft.FxCop.Sdk.AnalysisFilter.IsAspNetEmitted(Member member)
+   於 Microsoft.FxCop.Sdk.AnalysisFilter.ShouldNotAnalyze(Member member, FilterOptions options)
+   於 Microsoft.FxCop.Engines.Introspection.AnalysisVisitor.ShouldNotAnalyze(Member member, NodeBase nodeBase)
+   於 Microsoft.FxCop.Engines.Introspection.AnalysisVisitor.VisitMember(Member member, TargetMember target)
+   於 Microsoft.FxCop.Engines.Introspection.BaseVisitor.VisitMembers(MemberCollection members, TargetMemberDictionary targets, Boolean visitNestedTypes)
+   於 Microsoft.FxCop.Engines.Introspection.AnalysisVisitor.VisitType(TypeNode type, TargetType target)
+   於 Microsoft.FxCop.Engines.Introspection.AnalysisVisitor.Analyze(Queue queue)
+   於 Microsoft.FxCop.Engines.Introspection.IntrospectionAnalysisEngine.AnalyzeThread()</InnerStackTrace>
+   <InnerType>Microsoft.FxCop.Sdk.InvalidMetadataException</InnerType>
+   <InnerExceptionMessage>讀取模組 'App_Code' 時發生下列錯誤: 無法解析類型參考: [System.Xml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]System.Xml.DtdProcessing。</InnerExceptionMessage>
+   <InnerStackTrace>   於 Microsoft.FxCop.Sdk.Reader.HandleError(ModuleNode mod, String errorMessage)
+   於 Microsoft.FxCop.Sdk.Reader.GetDummyTypeNode(Identifier namesp, Identifier name, ModuleNode declaringModule, TypeNode declaringType, Boolean expectStruct)
+   於 Microsoft.FxCop.Sdk.Reader.GetTypeFromRef(Int32 i, Boolean expectStruct)
+   於 Microsoft.FxCop.Sdk.Reader.DecodeAndGetTypeDefOrRefOrSpec(Int32 codedIndex, Boolean expectStruct)
+   於 Microsoft.FxCop.Sdk.Reader.ParseTypeSignature(MemoryCursor sigReader, Boolean&amp; pinned, Boolean&amp; isTypeArgument)
+   於 Microsoft.FxCop.Sdk.Reader.ParseParameterTypes(TypeNodeCollection&amp; varArgTypes, MemoryCursor sigReader, Int32 paramCount, Boolean&amp; genericParameterEncountered)
+   於 Microsoft.FxCop.Sdk.Reader.GetMemberFromRef(Int32 i, TypeNodeCollection&amp; varArgTypes, Int32 numGenericArgs)
+   於 Microsoft.FxCop.Sdk.Reader.GetMemberFromToken(Int32 tok, TypeNodeCollection&amp; varArgTypes)
+   於 Microsoft.FxCop.Sdk.ILParser.GetMemberFromToken()</InnerStackTrace>
+  </Exception>
+ </Exceptions>
+</FxCopReport>

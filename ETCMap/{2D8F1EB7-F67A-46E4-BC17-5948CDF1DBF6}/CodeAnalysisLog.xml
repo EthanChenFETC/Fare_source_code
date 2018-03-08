@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="c:\program files (x86)\microsoft visual studio 14.0\team tools\static analysis tools\fxcop\Xml\CodeAnalysisReport.xsl"?>
+<FxCopReport Version="14.0">
+ <Targets>
+  <Target Name="C:\Users\Administrator\AppData\Local\Temp\tmpB011.tmp.cadir\bin\App_Code.dll">
+   <Modules>
+    <Module Name="app_code.dll">
+     <Namespaces>
+      <Namespace Name="">
+       <Types>
+        <Type Name="ClassDB" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#GetDataReader(System.String)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="必須檢視 SQL 查詢中是否有安全性弱點" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2016-02-05 12:00:13Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="D:\Projects\ETC\NewETC40\ETCMap\App_Code" File="DataObject.vb" Line="86">傳遞給 'ClassDB.GetDataReader(String)' 中的 'SqlCommand.New(String, SqlConnection)' 的查詢字串可能包含下列變數 'strSQL'。如果這其中任何變數來自使用者輸入，請考慮使用預存程序或參數化 SQL 查詢，而不要用字串串連的方式建立查詢。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#GetDataReaderSP(System.String,System.Data.SqlClient.SqlParameter[])" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="必須檢視 SQL 查詢中是否有安全性弱點" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2016-02-05 12:00:13Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="D:\Projects\ETC\NewETC40\ETCMap\App_Code" File="DataObject.vb" Line="40">傳遞給 'ClassDB.GetDataReaderSP(String, ParamArray SqlParameter())' 中的 'SqlCommand.New(String, SqlConnection)' 的查詢字串可能包含下列變數 'strSP'。如果這其中任何變數來自使用者輸入，請考慮使用預存程序或參數化 SQL 查詢，而不要用字串串連的方式建立查詢。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#RunReturnDataAdapter(System.String,System.String)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="必須檢視 SQL 查詢中是否有安全性弱點" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2016-02-05 12:00:13Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="D:\Projects\ETC\NewETC40\ETCMap\App_Code" File="DataObject.vb" Line="219">傳遞給 'ClassDB.RunReturnDataAdapter(String, String)' 中的 'SqlDataAdapter.New(String, SqlConnection)' 的查詢字串可能包含下列變數 'strSP'。如果這其中任何變數來自使用者輸入，請考慮使用預存程序或參數化 SQL 查詢，而不要用字串串連的方式建立查詢。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#RunReturnDataSet(System.String,System.String)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="必須檢視 SQL 查詢中是否有安全性弱點" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2016-02-05 12:00:13Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="D:\Projects\ETC\NewETC40\ETCMap\App_Code" File="DataObject.vb" Line="237">傳遞給 'ClassDB.RunReturnDataSet(String, String)' 中的 'SqlDataAdapter.New(String, SqlConnection)' 的查詢字串可能包含下列變數 'strSP'。如果這其中任何變數來自使用者輸入，請考慮使用預存程序或參數化 SQL 查詢，而不要用字串串連的方式建立查詢。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#RunReturnDataTable(System.String)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="必須檢視 SQL 查詢中是否有安全性弱點" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2016-02-05 12:00:13Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="D:\Projects\ETC\NewETC40\ETCMap\App_Code" File="DataObject.vb" Line="144">傳遞給 'ClassDB.RunReturnDataTable(String)' 中的 'SqlDataAdapter.New(String, SqlConnection)' 的查詢字串可能包含下列變數 'strSP'。如果這其中任何變數來自使用者輸入，請考慮使用預存程序或參數化 SQL 查詢，而不要用字串串連的方式建立查詢。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#RunSPReturnDataSet(System.String,System.String,System.Data.SqlClient.SqlParameter[])" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="必須檢視 SQL 查詢中是否有安全性弱點" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2016-02-05 12:00:13Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="D:\Projects\ETC\NewETC40\ETCMap\App_Code" File="DataObject.vb" Line="167">傳遞給 'ClassDB.RunSPReturnDataSet(String, String, ParamArray SqlParameter())' 中的 'SqlDataAdapter.New(String, SqlConnection)' 的查詢字串可能包含下列變數 'strSP'。如果這其中任何變數來自使用者輸入，請考慮使用預存程序或參數化 SQL 查詢，而不要用字串串連的方式建立查詢。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#RunSPReturnDataTable(System.String,System.Data.SqlClient.SqlParameter[])" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="必須檢視 SQL 查詢中是否有安全性弱點" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2016-02-05 12:00:13Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="D:\Projects\ETC\NewETC40\ETCMap\App_Code" File="DataObject.vb" Line="110">傳遞給 'ClassDB.RunSPReturnDataTable(String, ParamArray SqlParameter())' 中的 'SqlDataAdapter.New(String, SqlConnection)' 的查詢字串可能包含下列變數 'strSP'。如果這其中任何變數來自使用者輸入，請考慮使用預存程序或參數化 SQL 查詢，而不要用字串串連的方式建立查詢。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#RunSPReturnInteger(System.String,System.Data.SqlClient.SqlParameter[])" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="必須檢視 SQL 查詢中是否有安全性弱點" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2016-02-05 12:00:13Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="D:\Projects\ETC\NewETC40\ETCMap\App_Code" File="DataObject.vb" Line="275">傳遞給 'ClassDB.RunSPReturnInteger(String, ParamArray SqlParameter())' 中的 'SqlCommand.New(String, SqlConnection)' 的查詢字串可能包含下列變數 'strSP'。如果這其中任何變數來自使用者輸入，請考慮使用預存程序或參數化 SQL 查詢，而不要用字串串連的方式建立查詢。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#UpdateDB(System.String)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="必須檢視 SQL 查詢中是否有安全性弱點" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2016-02-05 12:00:13Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="D:\Projects\ETC\NewETC40\ETCMap\App_Code" File="DataObject.vb" Line="361">傳遞給 'ClassDB.UpdateDB(String)' 中的 'SqlCommand.New(String, SqlConnection)' 的查詢字串可能包含下列變數 'strSP'。如果這其中任何變數來自使用者輸入，請考慮使用預存程序或參數化 SQL 查詢，而不要用字串串連的方式建立查詢。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#UpdateDB(System.String,System.Data.SqlClient.SqlParameter[])" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="必須檢視 SQL 查詢中是否有安全性弱點" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2016-02-05 12:00:13Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="D:\Projects\ETC\NewETC40\ETCMap\App_Code" File="DataObject.vb" Line="316">傳遞給 'ClassDB.UpdateDB(String, ParamArray SqlParameter())' 中的 'SqlCommand.New(String, SqlConnection)' 的查詢字串可能包含下列變數 'strSP'。如果這其中任何變數來自使用者輸入，請考慮使用預存程序或參數化 SQL 查詢，而不要用字串串連的方式建立查詢。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+  <Target Name="C:\Users\Administrator\AppData\Local\Temp\tmpB011.tmp.cadir\bin\App_Web_vtf1rcsl.dll">
+   <Modules>
+    <Module Name="app_web_vtf1rcsl.dll">
+     <Namespaces>
+      <Namespace Name="">
+       <Types>
+        <Type Name="_Custom" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#GetHtml(System.String,System.Int32)" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="不要多次處置物件的 Dispose 方法" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2016-02-05 12:00:13Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="D:\Projects\ETC\NewETC40\ETCMap" File="Custom.aspx.vb" Line="635">方法 '_Custom.GetHtml(String, Integer)' 中可以多次處置物件 'dataStream'。若要避免產生 System.ObjectDisposedException，您不應該對物件呼叫多次 Dispose。: Lines: 635</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+ </Targets>
+ <Rules>
+  <Rule TypeName="不要多次處置物件的 Dispose 方法" Category="Microsoft.Usage" CheckId="CA2202">
+   <Name>不要多次處置物件的 Dispose 方法</Name>
+   <Description>正確實作的 Dispose 方法即使呼叫多次，也不會擲回例外狀況。但不保證一定如此，為避免產生 System.ObjectDisposedException，您不應該對物件呼叫多次 Dispose。</Description>
+   <Resolution Name="Default">方法 {1} 中可以多次處置物件 {0}。若要避免產生 System.ObjectDisposedException，您不應該對物件呼叫多次 Dispose。: Lines: 635</Resolution>
+   <Owner>RuleOwner</Owner>
+   <Url>http://msdn.microsoft.com/library/ms182334.aspx</Url>
+   <Email />
+   <MessageLevel Certainty="75">Warning</MessageLevel>
+   <File Name="dataflowrules.dll" Version="14.0.0.0" />
+  </Rule>
+  <Rule TypeName="必須檢視 SQL 查詢中是否有安全性弱點" Category="Microsoft.Security" CheckId="CA2100">
+   <Name>必須檢視 SQL 查詢中是否有安全性弱點</Name>
+   <Description>根據使用者輸入建構而成的 SQL 命令字串容易受到 SQL 插入式攻擊的威脅。Microsoft SQL Server 和其他資料庫伺服器支援預存程序和參數化 SQL 查詢，可減少插入式攻擊的風險。</Description>
+   <Resolution Name="WithNonLiterals">傳遞給 {1} 中的 {0} 的查詢字串可能包含下列變數 {2}。如果這其中任何變數來自使用者輸入，請考慮使用預存程序或參數化 SQL 查詢，而不要用字串串連的方式建立查詢。</Resolution>
+   <Owner>RuleOwner</Owner>
+   <Url>http://msdn.microsoft.com/library/ms182310.aspx</Url>
+   <Email />
+   <MessageLevel Certainty="75">Warning</MessageLevel>
+   <File Name="dataflowrules.dll" Version="14.0.0.0" />
+  </Rule>
+ </Rules>
+ <Localized>
+  <String Key="Category">分類</String>
+  <String Key="Certainty">確實性</String>
+  <String Key="CollapseAll">全部摺疊</String>
+  <String Key="CheckId">檢查 ID</String>
+  <String Key="Error">錯誤</String>
+  <String Key="Errors">錯誤</String>
+  <String Key="ExpandAll">全部展開</String>
+  <String Key="Help">說明</String>
+  <String Key="Line">行</String>
+  <String Key="Messages">訊息</String>
+  <String Key="LocationNotStoredInPdb">[位置未儲存在 PDB]</String>
+  <String Key="Project">專案</String>
+  <String Key="Resolution">解析度</String>
+  <String Key="Rule">規則</String>
+  <String Key="RuleFile">規則檔</String>
+  <String Key="RuleDescription">規則描述</String>
+  <String Key="Source">來源</String>
+  <String Key="Status">狀態</String>
+  <String Key="Target">目標</String>
+  <String Key="Warning">警告</String>
+  <String Key="Warnings">警告</String>
+  <String Key="ReportTitle">程式碼分析報告</String>
+ </Localized>
+</FxCopReport>

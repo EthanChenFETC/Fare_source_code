@@ -1,0 +1,54 @@
+﻿<%@ Page Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false" CodeFile="Fare_CalculatorOpinion.aspx.vb" Inherits="Fare_CalculatorOpinion"  EnableViewState="false" EnableEventValidation="false"  validateRequest="false" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <bgsound id="sound"></bgsound>
+            <div class="content">
+                    <div class="feedback_txts">
+                        有關計程通行費試算相關意見反映，請依下表填入您的寶貴意見：（標記為<em>*</em>的欄位是必填的）
+                    </div>
+                    <div class="feedback_area">
+                        <em>*</em> 姓名 Name：
+                        <asp:TextBox ID="FullNameTextBox" runat="server" cssclass="txtbox_feedback" ></asp:TextBox><asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="FullNameTextBox"
+                            Display="Dynamic" ErrorMessage="請填寫姓名"></asp:RequiredFieldValidator>
+                    </div>
+                    <div class="feedback_area">
+                        <em>*</em> Email Address：
+                        <asp:TextBox ID="EmailTextBox" runat="server" cssclass="txtbox_feedback"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="EmailTextBox"
+                            Display="Dynamic" ErrorMessage="請填寫Email"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="EmailTextBox"
+                            Display="Dynamic" ErrorMessage="請填寫正確的Email格式" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
+                    </div>
+                    <div class="feedback_area">
+                        <em>*</em> 電話 Phone：
+                        <asp:TextBox  ID="TelPhone2TextBox" runat="server" cssclass="txtbox_feedback"></asp:TextBox>
+                             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="TelPhone2TextBox"
+                            Display="Dynamic" ErrorMessage="請輸入電話"></asp:RequiredFieldValidator>
+                    </div>
+                    <div class="feedback_area">
+                        <em>*</em> 意見內容 Letter Content：
+                    </div>
+                    <div class="feedback_area">
+                        <asp:TextBox ID="LetterContentTextBox" runat="server" Rows="20" TextMode="MultiLine"
+                            cssclass="txtarea" ></asp:TextBox><asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="LetterContentTextBox"
+          Display="Dynamic" ErrorMessage="請填寫意見留言"></asp:RequiredFieldValidator>
+                        <em>小秘訣： 您可以先在記事本上編輯內容再將文字貼上，這樣可避免重打的可能喔！</em>
+                    </div>
+                    <div class="feedback_area">
+                        <em>*</em> 驗證碼：<em>請輸入下面圖片顯示之英數字</em>
+                        <div class="btn_code_area">
+                            <div class="img_code">
+                                <asp:Image ID="Image1" runat="server" AlternateText="驗證碼" 
+                                            ImageUrl="~/common/ValidateCode.ashx"/><asp:TextBox ID="txtValidateCode" runat="server" Width="81px"></asp:TextBox>
+                            <a name="CaptcSound" href="#CaptcSound" onclick="playvoice()" onkeypress="playvoice()"><img src= '<%= Page.ResolveUrl("~/images/btn_voice.png") %>' alt="語音驗證碼" border="0"/></a>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="txtValidateCode"
+                            Display="Dynamic" ErrorMessage="請填寫驗證碼"></asp:RequiredFieldValidator>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn_feedback_area">
+                        <div class="btn_send"><asp:ImageButton ID="InsertButton_Click" runat="server" AlternateText="確定送出" ImageUrl="~/images/btn_send.png" style="border-width:0px;"/></div>
+                        <div class="btn_clear"><asp:ImageButton ID="InsertButton_Reset" runat="server" AlternateText="清除重填" ImageUrl="~/images/btn_clear.png"  style="border-width:0px;" /></div>
+                    </div>
+            </div>
+</asp:Content>

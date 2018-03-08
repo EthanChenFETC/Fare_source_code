@@ -1,0 +1,130 @@
+﻿<%@ Master Language="VB" CodeFile="MasterPageFare.master.vb" Inherits="MasterPageFare"  %>
+<%@ Register Src="common/Top.ascx" TagName="TopArea" TagPrefix="uc1" %>
+<%@ Register Src="common/footer.ascx" TagName="footer" TagPrefix="uc2" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="head" runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<script src="http://code.jquery.com/jquery-1.12.3.js" type="text/javascript"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js" type="text/javascript"></script>
+<link href="<%=Page.ResolveUrl("~/css/style.css") %>" rel="stylesheet" type="text/css" />
+<script src="<%=Page.ResolveUrl("~/css/jquery-blockUI.js")%>" type="text/javascript"></script>
+<link href="<%=Page.ResolveUrl("~/css/jquery-ui.css")%>" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />  
+    <script src="https://apis.google.com/js/platform.js" async defer>{lang: 'zh-TW'}</script>
+
+ <title>計程費率試算</title>
+
+<script type="text/javascript">
+
+    //// Patch fractional .x, .y form parameters for IE10.
+    //if (typeof (Sys) !== 'undefined' && Sys.Browser.agent === Sys.Browser.InternetExplorer && Sys.Browser.version === 10) {
+    //    Sys.WebForms.PageRequestManager.getInstance()._onFormElementActive = function Sys$WebForms$PageRequestManager$_onFormElementActive(element, offsetX, offsetY) {
+    //        if (element.disabled) {
+    //            return;
+    //        }
+    //        this._activeElement = element;
+    //        this._postBackSettings = this._getPostBackSettings(element, element.name);
+    //        if (element.name) {
+    //            var tagName = element.tagName.toUpperCase();
+    //            if (tagName === 'INPUT') {
+    //                var type = element.type;
+    //                if (type === 'submit') {
+    //                    this._additionalInput = encodeURIComponent(element.name) + '=' + encodeURIComponent(element.value);
+    //                }
+    //                else if (type === 'image') {
+    //                    this._additionalInput = encodeURIComponent(element.name) + '.x=' + Math.floor(offsetX) + '&' + encodeURIComponent(element.name) + '.y=' + Math.floor(offsetY);
+    //                }
+    //            }
+    //            else if ((tagName === 'BUTTON') && (element.name.length !== 0) && (element.type === 'submit')) {
+    //                this._additionalInput = encodeURIComponent(element.name) + '=' + encodeURIComponent(element.value);
+    //            }
+    //        }
+    //    };
+    //}
+    var orig;
+    function mouseoverDDL(t) {
+        orig = t.style.width;
+        t.style.width = "auto";
+    }
+    function mouseoutDDL(t) {
+        t.style.width = orig;
+    }
+    function printPage() {
+        document.getElementById("ctl00_CPHolder1_ibtPrint").style.display = "none"
+        var printhead = '<table align="center"><tr><td><img src="images/printtitle.jpg" alt="計程通行費試算" width="800" height="90" border="0" /></td></tr><tr><td>'
+        var newstr = printhead + document.getElementById('printarea').innerHTML + "</td></tr></table>";
+        document.getElementById('nonPrint').style.display = "none";
+        document.getElementById('printHtml').innerHTML = newstr;
+        window.print();
+        document.getElementById('nonPrint').style.display = "block";
+        document.getElementById('printHtml').innerHTML = "";
+        document.getElementById("ctl00_CPHolder1_ibtPrint").style.display = "block"
+        return false;
+    }
+
+
+	</script>
+
+
+</head>
+<body>
+    <div id="mask" style="display:none;position:fixed;width:100%;height:100%;background:#000;z-index:1000;top:0;left:0;opacity:0.7;vertical-align:middle" align="center">
+        <img src="images/loading.gif" style=""/>
+    </div>
+    <a name="top"></a>
+    <div id="nonPrint">
+    <form id="form2" runat="server">
+                <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <uc1:TopArea ID="TopArea1" runat="server" />
+        <div id="content"><!-- 左區塊開始 -->
+            <div id="step"><img src="images/steptit.png" alt="計算3步驟簡單又方便 本計算僅就收費國道計算出結果，內容僅供參考" width="789" height="65" /></div>
+            <div id="Custom">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td align="left" width="613px" >
+                            <asp:Image ID="imgMenuTitle" runat="server" ImageUrl="images/custom_01.gif" />
+                        </td>
+                        <td align="left" width="337px" >
+                            <asp:HyperLink ID="HyperLink1" runat="server"><asp:Image ID="Image1" runat="server" ImageUrl="~/images/btn_SuggestedMap2.gif" /></asp:HyperLink><asp:HyperLink ID="HyperLink2" runat="server"><asp:Image ID="Image2" runat="server" ImageUrl="~/images/btn_Suggested2.gif" /></asp:HyperLink>
+                        </td>
+                    </tr>
+                </table>
+                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+		                <td width="16px" height="1%" align="left" valign="top" >
+			                <img src="images/box_01.png" alt=" " width="16px" height="15px" border="0"></td>
+		                <td align="left" valign="top" background="images/box_02.png"></td>
+		                <td width="18px" align="left" valign="top">
+			                <img src="images/box_03.png" alt=" " width="18px" height="15px" border="0">
+                            
+		                </td>
+	                </tr>
+                            <asp:ContentPlaceHolder ID="CPHolder1" runat="server" >
+                            </asp:ContentPlaceHolder>
+
+	                <tr>
+		                <td align="left" valign="top" width="16px">
+			                <img src="images/box_07.png" alt=" " width="16px" height="19px" border="0"></td>
+		                    <td align="left" valign="top" background="images/box_08.png"></td>
+		                    <td align="left" valign="top" width="18px">
+			                <img src="images/box_09.png" alt=" " width="18px" height="19px" border="0"></td>
+	                </tr>
+                </table>
+            </div> 
+        </div> 
+    </form>
+        <div id="footer">
+            <div align="center">
+                <button type="button" class="btn btn-outline btn-success" onclick="javascript:history.back();">上一頁</button>&nbsp;
+                <button type="button" class="btn btn-outline btn-success" onclick="javascript:location.href='#top';">回頂端</button>&nbsp;
+                <button type="button" class="btn btn-outline btn-success" onclick="javascript:window.print()">列印</button>
+            </div>
+            <uc2:footer ID="footer1" runat="server" />
+        </div>
+</div> 
+<div id="printHtml"></div>
+</body>
+</html>

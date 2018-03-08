@@ -1,0 +1,310 @@
+/* CSS Document */
+body{
+	padding: 0;
+	margin: 0;
+	background-image: url(images/ch_bg.jpg);
+	color:  #424242;
+	text-align: center;
+	background-repeat: repeat-x;
+	background-color: #DDB85D;
+}
+#container{
+	position: relative;
+	width:962px;
+	text-align: left;
+	background-position-y:50%;
+	background-image: url(images/ch_mainbg.jpg);
+	background-repeat: repeat-x;
+	background-color: #FFFFFF;
+	background-position: center top;
+	margin-top: 0;
+	margin-right: auto;
+	margin-left: auto;
+	border-top-width: 0px;
+	border-right-width: 1px;
+	border-bottom-width: 30px;
+	border-left-width: 1px;
+	border-top-style: none;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-bottom-color: #FFFFFF;
+	border-right-color: #F8D473;
+	border-left-color: #F8D473;
+	border:#00CC99 solid 3px;
+}
+#pageHeader  {
+
+	background-image: url(images/chL_01.jpg);
+	width: 962px;
+	height: 127px;
+	border:#f0C0C0 solid 10px;
+	overflow:hidden;
+}
+#pageHeaderBg{
+	float:left;
+	width: 300px;
+	height: 40px;
+	margin: 0px;
+	padding: 0px;
+	border-top: 0;
+	border:#ffCC00 solid 6px;
+	top:120px;
+}
+#pageHeaderBg .counterinfo{
+	font-family: Verdana, "·s²Ó©úÅé";
+	font-size: 39px;
+	color: #FFFFFF;
+	position: relative;
+	bottom:0;
+	padding-top:100px;
+	padding-left: 130px;
+	display: block;
+}
+
+
+#pageHeaderMenu{
+float:right;
+	font-size: 12px;
+	color: #333333;
+	position:relative;
+	top:10px;
+	right:0px;
+	width:280px;
+	height: 41px;
+	background-image: url(images/top_nav.gif);
+	background-repeat: no-repeat;
+	background-position: 0px 4px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	padding-left: 10px;
+	margin: 0px;
+}
+#pageHeaderMenu a:link, #pageHeaderMenu a:visited{
+	font-size: 12px;
+	height: 20px;
+	color: #333333;
+	line-height: 25px;
+	text-decoration: none;
+}
+#pageHeaderMenu a:hover{
+	font-size: 12px;
+	height: 20px;
+	color: #f00;
+	line-height: 25px;
+}
+#pageHeaderMenu ul{
+	margin-top:-1px;
+	margin-bottom:0;
+	margin-left:0;
+	padding-top:0;
+}
+#pageHeaderMenu li{
+
+	display:inline;
+	background-image: url(images/top_nav_point.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+	padding-left: 6px;
+	padding-top:-20px;
+	margin-right:3px;
+	}
+	
+	
+/*--------- Left Column---------*/
+#linkList {
+	position:absolute;
+	left:0;
+	width:182px;
+	top:128px;
+	float:left;
+}
+#linkList ul {
+	margin: 0;
+	padding:0;
+	left:0;
+	border:0;
+	border-collapse:collapse;
+}
+#linkList p {
+	font-size: 1px;
+	line-height: 1px;
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+}
+
+/*-------- Center Content ---------*/
+
+#indexcontent {
+	float:right;
+	background-image: url(images/ch_mainbg.jpg);
+	width:599px;
+	right: 181px;
+	left: 180px;
+	top:0;
+	margin-left: 0px;
+	padding-right: 0px;
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 10px;
+	border-left-width: 0px;
+	text-align: left;
+	margin-top: 0px;
+	position:relative;
+	background-color: #FFFFFF;
+	background-repeat: repeat-x;
+	border-bottom-style: solid;
+	border-bottom-color: #FFFFFF;
+}
+
+/*-------------------*/
+
+.HeadPicBlock{
+	width:336px;
+	vertical-align: top;
+}
+
+.HeadLineBlock {
+	padding: 10px;
+	font-size: 12px;
+	width:244px;
+	color: #343434;
+	background-image: url(images/ch_army_06.gif);
+	background-repeat: repeat-x;
+	vertical-align: top;
+}
+.HeadLineBottom{
+	background-image: url(images/ch_army_30.gif);
+	background-repeat: repeat-x;
+}
+.HeadLineSubjet{
+	font-weight: bold;
+	font-size:13px;
+}
+.HeadLineBlock a {
+	color: #343434;
+	text-decoration: none;
+}
+.HeadLineBlock a:hover {
+	color: #343434;
+	text-decoration: underline;
+}
+.HeadLineBlock strong {
+	font-size: 14px;
+	font-weight: bold;
+	color: #343434;
+}
+.HeadLineBlock ul {
+	margin-top:15px;
+}
+.HeadLineDATE {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #C5821B;
+	margin-left: 10px;
+}
+.HeadLineBlock table {
+	margin: 0px;
+	font-size: 12px;
+	line-height: 16px;
+	color: #343434;
+	width:100%;
+}
+
+.HeadLineBlock ul {
+	list-style-position: outside;
+	list-style-type: disc;
+	padding:0; margin-top:0px; margin-bottom:0px; margin-right:0px; margin-left:16px;
+}
+.NewsBlock{
+	width:342px;
+	font-size:12px;
+	vertical-align: top;
+}
+.NewsBlock a:link, .NewsBlock a:visited{
+	text-decoration:none;
+	color:#666666;
+}
+.NewsBlock a:active, .NewsBlock a:hover{
+	text-decoration:none;
+	color:#f00;
+}
+.NewsBlock table{
+	width:100%;
+}
+.MultiMediaBlock{
+	font-size:12px;
+	border-collapse:collapse;
+	padding:0;
+	
+}
+/*------------------ Center bottom ----*/
+.serviceCenter{
+	font-size:12px;
+	background-image: url(images/ch_army_index_sctable_04.gif);
+	background-repeat: repeat-y;
+	margin-top:20px;
+}
+.serviceCenter a:link, .serviceCenter a:visited{
+	text-decoration:none;
+}
+.serviceCenter a:hover, .serviceCenter a:active{
+	text-decoration:underline;
+	color:#FF6633;
+}
+
+
+#miscList{
+	font-size:12px;
+	padding:0;
+	padding-left:3px;
+	margin:0;
+	margin-left: -2px;
+	width:180px;
+
+}
+#miscList p{
+	margin-bottom:-10px;;
+	margin-left:3px;
+}
+
+
+
+#footer{
+	position: relative; 
+	background-image: url('images/footer.gif');
+	background-repeat: no-repeat;
+	background-position: 0 55px; 
+	padding-left:20px; 
+	padding-right:10px; 
+	padding-top:65px; 
+	padding-bottom:30px
+	top:20px;
+}
+.floorLeft{
+	top:30px;;
+	font-size:9px;
+	float:left;
+	position:relative;
+	width:53%;
+	margin-bottom:20px;
+	color:#fff;
+}
+.floorLeft a:link, .floorLeft a:visited{
+	color:#fff;
+	text-decoration: none;
+}
+.floorLeft a:hover, .floorLeft a:active{
+	color:#f00;
+	text-decoration: none;
+}
+.floorRight{
+	margin-top: -9px;
+	color:#fff;
+	font-size:11px;
+	float:right;
+	position:relative;
+	width:67%;
+
+}

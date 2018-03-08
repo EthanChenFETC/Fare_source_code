@@ -1,0 +1,63 @@
+h3{
+text-align: center;
+margin-bottom:0;
+}
+.PrintTable{
+	width:18.5cm;
+	font-family:"標楷體", Verdana, Arial, Helvetica, sans-serif ;
+	font-size:12pt;
+	border:2px groove #000000;
+	border-collapse:collapse;
+	margin-left:auto;
+	margin-right:auto;
+	text-align:left;
+}
+.PrintTable td{
+	border:#000000 solid 1px;
+	display:block;
+	padding:3px;
+	color:#000000;
+}
+.PrintTable h2{
+text-align: center;
+margin-bottom:0;
+}
+
+.PrintTable .spanLeft{
+	float:left;
+}
+.PrintTable .spanRight{
+	float:right;
+}
+.ColRight{
+	width:70%
+}
+.ColLeft{
+	width:auto
+}
+label{
+	color:#000000;
+}
+.NameSign{
+	float:right;
+	font-size:14pt;
+	
+}
+.NameSignText{
+	text-decoration:underline;
+}
+
+.PrintTableNonBorder{
+	width:18cm;
+	font-family:"標楷體", Verdana, Arial, Helvetica, sans-serif ;
+	font-size:15pt;
+	border-collapse:collapse;
+	margin-left:auto;
+	margin-right:auto;
+	text-align:left;
+}
+.PrintTableNonBorder td{
+	display:block;
+	padding:3px;
+	color:#000000;
+}

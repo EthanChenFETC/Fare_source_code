@@ -1,0 +1,102 @@
+﻿<%@ Master Language="VB" CodeFile="MasterPage.master.vb" Inherits="MasterPage" %>
+<%@ Register Src="common/Top.ascx" TagName="TopArea" TagPrefix="uc1" %>
+<%@ Register Src="common/footer.ascx" TagName="footer" TagPrefix="uc2" %>
+<%@ Register Src="common/LeftMenu.ascx" TagName="LeftMenu" TagPrefix="uc3" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="HEAD" runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; user-scalable=1.0;">
+<script src="<%=Page.ResolveUrl("~/js/jquery-latest.min.js") %>" type="text/javascript"></script>
+
+<link href="<%=Page.ResolveUrl("~/css/style.css")%>" rel="stylesheet" type="text/css" />
+<script src="http://code.jquery.com/jquery-1.12.3.js" type="text/javascript"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js" type="text/javascript"></script>
+<link href="<%=Page.ResolveUrl("~/js/jquery-ui.css")%>" rel="stylesheet" type="text/css" />
+<link href="<%=Page.ResolveUrl("~/css/collapse.css")%>" rel="stylesheet" type="text/css" />
+<title>國道高速公路局-計程通行費試算</title>
+
+<script type="text/javascript">
+    $(function () {
+        $('body').on('click', '.btn_menu a', function (ev) {
+            ev.preventDefault();
+            var $pane = $('.pane');
+            if ($pane.hasClass('slide')) {
+                $pane.animate({
+                    left: '0',
+                }, 500, function () {
+                    $pane.removeClass('slide');
+                });
+            } else {
+                $pane.animate({
+                    left: '-80%',
+                }, 500, function () {
+                    $pane.addClass('slide');
+                    $pane.find('.left_slide').height($('body').height());
+                });
+            }
+            return false;
+        });
+
+        $('.pane .left_slide').height($('body').height());
+    });
+    // Patch fractional .x, .y form parameters for IE10.
+    if (typeof (Sys) !== 'undefined' && Sys.Browser.agent === Sys.Browser.InternetExplorer && Sys.Browser.version === 10) {
+        Sys.WebForms.PageRequestManager.getInstance()._onFormElementActive = function Sys$WebForms$PageRequestManager$_onFormElementActive(element, offsetX, offsetY) {
+            if (element.disabled) {
+                return;
+            }
+            this._activeElement = element;
+            this._postBackSettings = this._getPostBackSettings(element, element.name);
+            if (element.name) {
+                var tagName = element.tagName.toUpperCase();
+                if (tagName === 'INPUT') {
+                    var type = element.type;
+                    if (type === 'submit') {
+                        this._additionalInput = encodeURIComponent(element.name) + '=' + encodeURIComponent(element.value);
+                    }
+                    else if (type === 'image') {
+                        this._additionalInput = encodeURIComponent(element.name) + '.x=' + Math.floor(offsetX) + '&' + encodeURIComponent(element.name) + '.y=' + Math.floor(offsetY);
+                    }
+                }
+                else if ((tagName === 'BUTTON') && (element.name.length !== 0) && (element.type === 'submit')) {
+                    this._additionalInput = encodeURIComponent(element.name) + '=' + encodeURIComponent(element.value);
+                }
+            }
+        };
+    }
+    var orig;
+    function mouseoverDDL(t) {
+        orig = t.style.width;
+        t.style.width = "auto";
+    }
+    function mouseoutDDL(t) {
+        t.style.width = orig;
+    }
+
+    function playvoice() {
+        document.getElementById("sound").src = '<%= Page.ResolveUrl("~/GetMp3.aspx") %>'
+               return false;
+           }
+</script>
+</head>
+<body id="body"  >
+    <a name="top"></a>
+        <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+<div class="pane cfx">
+    <div class="wrapper">
+        <div class="main">
+            <uc1:TopArea ID="TopArea1" runat="server" />
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" ></asp:ContentPlaceHolder>
+        </div>
+        <uc2:footer ID="footer1" runat="server" />
+    </div>
+    <uc3:LeftMenu ID="LeftMenu1" runat="server" />
+</div>
+            </form>
+</body>
+</html>
+                    

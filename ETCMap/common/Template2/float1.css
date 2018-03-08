@@ -1,0 +1,63 @@
+/* CSS Document */
+body{
+	margin:0;
+	padding:0;
+}
+
+#float_function{
+	position:absolute;
+	z-index:999;
+	background-color:#FFFFFF;
+	margin-left:auto;
+	margin-right:auto;
+	width: 60%;
+	height: 400px;
+	top:180px;
+	left:20%;
+	right:20%;
+	padding: 15px;
+	padding-top:8px;
+	color:#666;
+	border-top-width: 1px;
+	border-right-width: 2px;
+	border-bottom-width: 2px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #666666;
+	border-right-color: #666666;
+	border-bottom-color: #666666;
+	border-left-color: #666666;
+	background-image: url(images/float_top_bg.gif);
+	background-repeat: repeat-x;
+	background-position: top;
+	overflow:auto;
+}
+#float_bg{
+	position:absolute;
+	z-index:800;
+	width: 100%;
+	min-height:100%;
+	height:100%;
+/*	height:1250px;  */
+
+	bottom: 0px;
+	right: 0px;
+	margin: 0;
+	padding: 0;
+	filter: alpha(opacity=20);
+	opacity: 0.2;
+	background-color:transparent !important;
+	background-color:#333333;
+	/*
+	background-image/**: url("images/maskBG.png") !important; // For browsers Moz, Opera, etc.
+	background-image:none;
+	background-repeat: repeat; */
+}
+body #float_function{
+	min-height:100%;
+	height:100px;
+}
+

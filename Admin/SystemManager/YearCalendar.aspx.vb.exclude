@@ -1,0 +1,225 @@
+﻿Imports System.Data
+Imports System.Data.SqlClient
+
+Partial Class SystemManager_YearCalendar
+    Inherits PageBase
+
+    Dim _Today As String = Now.ToString("yyyy/MM/dd", System.Globalization.DateTimeFormatInfo.InvariantInfo)
+    Dim _ThisYear As String = Now.ToString("yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo)
+
+
+    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        If Not IsPostBack Then
+            doBindYear()
+        End If
+        doRenderVacationDays()
+    End Sub
+
+    ''' <summary>
+    ''' Binding the DropdownList to Show Years
+    ''' </summary>
+    ''' <remarks></remarks>
+    Private Sub doBindYear()
+        Dim ThisYear As Integer = CInt(_ThisYear)
+        Dim i As Integer
+        Me.ddlYear.Items.Clear()
+        For i = ThisYear To _ThisYear + 5
+            Me.ddlYear.Items.Add(New ListItem(i))
+        Next
+    End Sub
+
+
+    ''' <summary>
+    ''' Add the New or Remove the VacationDay
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Protected Sub Calendar1_SelectionChanged(ByVal sender As Object, ByVal e As System.EventArgs)
+        Dim SenderID As String = CType(sender, Calendar).ID 'Get The Sender Calendar's ID
+        Dim TheCalendar As Calendar = CType(Me.Master.FindControl("ContentPlaceHolder1").FindControl(SenderID), Calendar)
+        Dim TheSelectedDate As Date = TheCalendar.SelectedDate
+        Dim TheDayString As String = TheSelectedDate.ToString("yyyy/MM/dd", System.Globalization.DateTimeFormatInfo.InvariantInfo)
+        Dim TheMonth As Integer = CInt(SenderID.Replace("Calendar", ""))
+
+
+        ClassDB.UpdateDB("Net2_YearCalendar_Single_Update", New SqlParameter("@VacationDay", TheDayString))
+
+        Me.lbMessage.Text += "設定日期 ("
+        Me.lbMessage.Text += TheDayString
+        Me.lbMessage.Text += ") 完成!"
+
+        doRenderVacationDays()
+
+        DataList1.DataBind()
+
+    End Sub
+
+
+    ''' <summary>
+    ''' Render All Calendar to show the Vacation Days
+    ''' </summary>
+    ''' <remarks></remarks>
+    Private Sub doRenderVacationDays(Optional ByVal Month As Integer = 0)
+        'Get Data from SQL
+        'Run Cycle to Bind The VacationDays to Select.
+
+
+
+        If Month = 0 Then
+            Dim i As Integer
+            Dim ThisYear As Integer = CInt(Me.ddlYear.SelectedValue)
+            For i = 1 To 12
+
+                Dim TheMonth As String = IIf(i < 10, "0" & i.ToString, i)
+                Dim YearMonth As String = ThisYear & "/" & TheMonth & "/"
+                Dim CalendarControl As Calendar = CType(Me.Master.FindControl("ContentPlaceHolder1").FindControl("Calendar" & i), Calendar)
+                CalendarControl.SelectedDates.Clear()
+                Using dr As SqlDataReader = ClassDB.GetDataReaderSP("Net2_YearCalendar_Get_OneMonth_VacationDays", New SqlParameter("@YearMonth", YearMonth))
+                    Try
+                        If dr IsNot Nothing Then
+                            While dr.Read
+                                Dim vDay As Date = CType("#" & dr("VacationDay").ToString & "#", Date)
+                                CalendarControl.SelectedDates.Add(vDay)
+                            End While
+                        End If
+                    Catch ex As Exception
+                        WriteErrLog(ex, Me.Page)
+                    Finally
+
+                    End Try
+                End Using
+                'Setting Calendar Visible Month
+                Dim VisibleDt As Date = CType("#" & ThisYear & "/" & i & "/1" & "#", Date)
+                CalendarControl.VisibleDate = VisibleDt
+                AddHandler CalendarControl.SelectionChanged, AddressOf Calendar1_SelectionChanged
+            Next
+
+        Else
+            Dim ThisYear As Integer = CInt(Me.ddlYear.SelectedValue)
+            Dim YearMonth As String = IIf(Month < 10, ThisYear & "/0" & Month & "/", ThisYear & "/" & Month & "/")
+            Dim CalendarControl As Calendar = CType(Me.FindControl("Calendar" & Month), Calendar)
+            CalendarControl.SelectedDates.Clear()
+            Using dr As SqlDataReader = ClassDB.GetDataReaderSP("Net2_YearCalendar_Get_OneMonth_VacationDays", New SqlParameter("@YearMonth", YearMonth))
+                Try
+                    If dr IsNot Nothing Then
+                        While dr.Read
+                            Dim vDay As Date = CType("#" & dr("VacationDay").ToString & "#", Date)
+                            CalendarControl.SelectedDates.Add(vDay)
+                        End While
+                    End If
+                Catch ex As Exception
+                    WriteErrLog(ex, Me.Page)
+                Finally
+
+                End Try
+
+            End Using
+            'Setting Calendar Visible Month
+            Dim VisibleDt As Date = CType("#" & ThisYear & "/" & Month & "/1" & "#", Date)
+            CalendarControl.VisibleDate = VisibleDt
+        End If
+
+
+    End Sub
+
+
+    ''' <summary>
+    ''' 重設年度基本休假日(周六、周日)
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Protected Sub btnSetDefaultYear_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSetDefaultYear.Click
+        doSetDefaultYearCalendar()
+        doRenderVacationDays()
+    End Sub
+
+
+    ''' <summary>
+    ''' 重設年度基本休假日(周六、周日)-Update SQL DB
+    ''' </summary>
+    ''' <remarks></remarks>
+    Private Sub doSetDefaultYearCalendar()
+
+
+        Dim i As Integer
+        Dim ThisYear As Integer = CInt(Me.ddlYear.SelectedValue)
+
+        For i = 1 To 12
+            'Del the Month's Data
+            Dim TheMonth As String = IIf(i < 10, "0" & i.ToString, i)
+            Dim YearMonth As String = ThisYear & "/" & TheMonth & "/"
+            ClassDB.UpdateDB("Net2_YearCalendar_Delete_OneMonth_VacationDays", New SqlParameter("@YearMonth", YearMonth))
+
+            Dim MonthDaysCount As Integer = Date.DaysInMonth(ThisYear, i)
+            Dim j As Integer
+            For j = 1 To MonthDaysCount
+                Dim TheDay As Date = CType("#" & ThisYear & "/" & i & "/" & j & "#", Date)
+                If TheDay.DayOfWeek = DayOfWeek.Saturday OrElse TheDay.DayOfWeek = DayOfWeek.Sunday Then
+                    Dim TheDayString As String = TheDay.ToString("yyyy/MM/dd", System.Globalization.DateTimeFormatInfo.InvariantInfo)
+                    ClassDB.UpdateDB("Net2_YearCalendar_Insert", New SqlParameter("@VacationDay", TheDayString))
+                End If
+            Next
+        Next
+
+
+    End Sub
+
+
+
+    ''' <summary>
+    ''' 重設本月份基本休假日(周六、周日)
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Protected Sub Button1_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles _
+    Button1.Click, Button2.Click, Button3.Click, _
+    Button4.Click, Button5.Click, Button6.Click, _
+    Button7.Click, Button8.Click, Button9.Click, _
+    Button10.Click, Button11.Click, Button12.Click
+
+        'Get the Press Button
+        Dim SenderID As String = RemoveSQLInjection(CType(sender, Button).ID)
+        Dim Year As Integer = CInt(Me.ddlYear.SelectedValue)
+        Dim Month As Integer = CInt(SenderID.Replace("Button", ""))
+        Dim YearMonth As String = IIf(Month < 10, Year & "/0" & Month & "/", Year & "/" & Month & "/")
+
+        'Del This Month's Data
+        ClassDB.UpdateDB("Net2_YearCalendar_Delete_OneMonth_VacationDays", New SqlParameter("@YearMonth", YearMonth))
+
+        Dim MonthDaysCount As Integer = Date.DaysInMonth(Year, Month)
+        Dim j As Integer
+        For j = 1 To MonthDaysCount
+            Dim TheDay As Date = CType("#" & Year & "/" & Month & "/" & j & "#", Date)
+            If TheDay.DayOfWeek = DayOfWeek.Saturday OrElse TheDay.DayOfWeek = DayOfWeek.Sunday Then
+                Dim TheDayString As String = TheDay.ToString("yyyy/MM/dd", System.Globalization.DateTimeFormatInfo.InvariantInfo)
+                ClassDB.UpdateDB("Net2_YearCalendar_Insert", New SqlParameter("@VacationDay", TheDayString))
+            End If
+        Next
+
+
+
+        doRenderVacationDays()
+    End Sub
+
+
+    Protected Sub btnSelectYear_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSelectYear.Click
+        doRenderVacationDays()
+    End Sub
+
+    Protected Sub DataList1_ItemDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.DataListItemEventArgs) Handles DataList1.ItemDataBound
+        If e.Item.ItemType = ListItemType.Header Then
+            Dim lb As Label = CType(e.Item.FindControl("Label1"), Label)
+            lb.Text = RemoveXSS(Me.ddlYear.SelectedValue) & "年度已設定之休假日清單 "
+
+            Dim dt As DataTable = CType(Me.SDS_VcationDays_List.Select(New DataSourceSelectArguments), DataView).Table
+            lb.Text += "總計 " & dt.Rows.Count & " 天"
+            Dim VacationDayLabel As Label = CType(e.Item.FindControl("VacationDayLabel"), Label)
+            VacationDayLabel.Text = System.Web.HttpUtility.HtmlEncode(e.Item.DataItem("VacationDay"))
+        End If
+    End Sub
+
+
+End Class

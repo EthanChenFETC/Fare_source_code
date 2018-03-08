@@ -1,0 +1,59 @@
+.cfx:before, .cfx:after{
+    content: "";
+    display: table;
+    line-height: 0;
+}
+.cfx:after{
+    clear: both;
+}
+
+body{
+	position: relative;
+	width: 100%;
+}
+.pane{
+	position: relative;
+	width: 200%;
+	background: url("../imgs/bg_new.png") no-repeat fixed left top / cover  #CBFFBB;
+}
+.wrapper {
+    float: left;
+    width: 50%;
+	background: none;
+}
+.left_slide {
+    float: left;
+	display: block;
+	position: relative;
+    width: 45%;
+	background: rgba(255,255,255,0.8);
+}
+.nav ul, .nav ul li{
+	font-size:15px;
+	font-family:Arial, Helvetica, sans-serif;
+	list-style: none outside none;
+}
+.nav ul{
+	margin: 0;
+	border-bottom: 1px solid #82B04E;
+	padding: 0;
+}
+.nav ul li{
+	margin: 0;
+	border-bottom: 1px dashed #82B04E;
+	padding: 0;
+	background: none;
+}
+.nav li:last-child{
+	border-bottom: none;
+}
+.nav ul li a{
+	display: block;
+	padding: 15px 30px;
+	color: #025D00;
+	text-decoration: none;
+}
+.nav ul li a:hover{
+	background: #FFF;
+	color: #82B04E;
+}

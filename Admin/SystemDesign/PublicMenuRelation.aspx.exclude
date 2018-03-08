@@ -1,0 +1,8 @@
+﻿<%@ Page Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false" CodeFile="PublicMenuRelation.aspx.vb" Inherits="SystemDesign_PublicUserRelation" title="Untitled Page" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+ 
+                        <asp:Button ID="btbSubmit" runat="server" Text="更新設定" />
+                        <asp:Label ID="lbMessage" runat="server" ForeColor="Red"></asp:Label>
+                     
+</asp:Content>
+

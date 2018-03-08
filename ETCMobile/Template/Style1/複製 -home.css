@@ -1,0 +1,120 @@
+/* CSS Document */
+body{
+	padding: 0;
+	margin: 0;
+	background-image: url(images/ch_bg.jpg);
+	color:  #424242;
+	text-align: center;
+	background-repeat: repeat-x;
+	background-color: #DDB85D;
+}
+#container{
+	position: relative;
+	background-repeat: repeat-x;
+	width:962px;
+	text-align: left;
+	background-position-y:50%;
+	background-image: url(images/ch_mainbg.jpg);
+	background-color: #FFFFFF;
+	background-position: center top;
+	margin-top: 0;
+	margin-right: auto;
+	margin-left: auto;
+	border-top-width: 0px;
+	border-right-width: 1px;
+	border-bottom-width: 30px;
+	border-left-width: 1px;
+	border-top-style: none;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-bottom-color: #FFFFFF;
+	border-right-color: #F8D473;
+	border-left-color: #F8D473;
+}
+#intro{
+}
+#pageHeader {
+	padding: 0px 0 0 0px;
+	background-color: #FFFFFF;
+	background-image: url(images/ch_mainbg.jpg);
+	background-repeat: repeat-x;
+	position: relative;
+}
+
+#pageHeaderBg{
+	width: 1004px;
+	height: 127px;
+	background-image: url(images/chL_01.jpg);
+	margin: 0px;
+	padding: 0px;
+	border-top: 0;
+}
+#pageHeaderBg .countertxt {
+	font-family: Verdana, "新細明體";
+	font-size: 21px;
+	color: #FFFFFF;
+	position: relative;
+	top:50px;
+	padding-top:100px;
+	padding-left: 130px;
+	font-variant: normal;
+	padding-top: 90px;	/*width: 0;
+	height: 0;
+	overflow: hidden;*/
+	float: left;
+	font-weight: normal;
+}
+
+#pageHeader h2 {
+	font-family: Verdana, "新細明體";
+	font-size: 12px;
+	color: #FFFFFF;
+	position: static;
+	padding-top: 90px;
+	padding-left: 130px;
+	font-variant: normal;
+}
+#pageHeaderMenu{
+	font-size: 12px;
+	color: #333333;
+	position:absolute;
+	top:10px;
+	right:0px;
+	width:280px;
+	height: 41px;
+	background-image: url(images/top_nav.gif);
+	background-repeat: no-repeat;
+	background-position: 0px 4px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	padding-left: 10px;
+	margin: 0px;
+}
+#pageHeaderMenu a:link, #pageHeaderMenu a:visited{
+	font-size: 12px;
+	height: 20px;
+	color: #333333;
+	line-height: 25px;
+	text-decoration: none;
+}
+#pageHeaderMenu a:hover{
+	font-size: 12px;
+	height: 20px;
+	color: #f00;
+	line-height: 25px;
+}
+#pageHeaderMenu ul{
+	margin-top:-1px;
+	margin-left:0;
+}
+#pageHeaderMenu li{
+	list-style-position: inside;
+	list-style-image: url(images/top_nav_point.gif);
+	display:inline;
+	background-image: url(images/top_nav_point.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+	padding-left: 6px;
+	margin:0;
+	margin-right:3px;
+	}

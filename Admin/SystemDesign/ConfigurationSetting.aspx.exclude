@@ -1,0 +1,138 @@
+﻿<%@ Page Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="false"
+    CodeFile="ConfigurationSetting.aspx.vb" Inherits="SystemDesign_ConfigurationSetting"
+    Title="Untitled Page" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <ContentTemplate>
+            <table cellspacing="0" cellpadding="5" width="100%" border="0">
+                <tr>
+                    <td id="tr_AddNew" runat="server" style="height: 227px">
+                        <table class="Fn" id="Table_Fn" cellspacing="1" cellpadding="5" border="0">
+                            <tr>
+                                <td>
+                                    <p>
+                                        Read &amp; Write Config File:
+                                        <asp:TextBox ID="txt_ConfigFile" runat="server" CssClass="form_txt" Columns="50">Configuration.Config</asp:TextBox>&nbsp;
+                                        <asp:Button ID="Button1" runat="server" Text="取得設定檔" CssClass="Btn"></asp:Button>&nbsp;<asp:Button
+                                            ID="btnAddNew" runat="server" Text="儲存設定" CssClass="Btn" ToolTip="確  定!"></asp:Button>&nbsp;&nbsp;&nbsp;<asp:Label
+                                                ID="lblMessage_Add" runat="server" EnableViewState="False" ForeColor="Red"></asp:Label></p>
+                                </td>
+                            </tr>
+                        </table>
+                        <br />
+                        <table class="Dg" id="Table1" cellspacing="1" cellpadding="5" border="0">
+                            <tr class="DgHeader">
+                                <td width="20%">
+                                </td>
+                                <td width="80%">
+                                    網站設定資料</td>
+                            </tr>
+                            <tr>
+                                <td align="right" width="20%">
+                                    網站編號 <span class="t">SiteID</span></td>
+                                <td width="80%">
+                                    <asp:TextBox ID="Textbox1" runat="server" Columns="110" CssClass="form_txt" MaxLength="300"></asp:TextBox></td>
+                            </tr>
+                            <tr>
+                                <td align="right" width="20%">
+                                    <span class="t">&nbsp;網站網址 SiteDomain</span></td>
+                                <td width="80%">
+                                    <asp:TextBox ID="Textbox2" runat="server" Columns="110" CssClass="form_txt" MaxLength="300"></asp:TextBox></td>
+                            </tr>
+                            <tr>
+                                <td align="right" style="height: 34px" width="20%">
+                                    <span class="t">網站名稱 SiteName</span></td>
+                                <td style="height: 34px;" width="80%">
+                                    <asp:TextBox ID="Textbox3" runat="server" Columns="110" CssClass="form_txt" MaxLength="300"></asp:TextBox></td>
+                            </tr>
+                            <tr>
+                                <td align="right" width="20%">
+                                    <span class="t">網站語言 SiteLang</span></td>
+                                <td width="80%">
+                                    <asp:TextBox ID="Textbox4" runat="server" Columns="110" CssClass="form_txt" MaxLength="300"></asp:TextBox></td>
+                            </tr>
+                            <tr>
+                                <td align="right" width="20%">
+                                    <span class="t">網站管理網址 SiteAdminDomain</span></td>
+                                <td width="80%">
+                                    <asp:TextBox ID="Textbox5" runat="server" Columns="110" CssClass="form_txt" MaxLength="300"></asp:TextBox></td>
+                            </tr>
+                            <tr>
+                                <td align="right" width="20%">
+                                    資料庫連線字串<span class="t"> CnnString</span></td>
+                                <td width="80%">
+                                    <asp:TextBox ID="Textbox6" runat="server" Columns="110" CssClass="form_txt" MaxLength="300"></asp:TextBox></td>
+                            </tr>
+                            <tr class="Table_Item">
+                                <td align="right" width="20%">
+                                    <span class="t">郵件伺服器位址 MailServer</span></td>
+                                <td width="80%">
+                                    <asp:TextBox ID="Textbox7" runat="server" Columns="110" CssClass="form_txt" MaxLength="300"></asp:TextBox></td>
+                            </tr>
+                            <tr>
+                                <td align="right" width="20%">
+                                    <span class="t">主要服務信箱 MainMailAccount</span></td>
+                                <td width="80%">
+                                    <asp:TextBox ID="Textbox8" runat="server" Columns="110" CssClass="form_txt" MaxLength="300"></asp:TextBox></td>
+                            </tr>
+                            <tr>
+                                <td align="right" width="20%">
+                                    <span class="t">電子報信箱 ePaperMailAccount</span></td>
+                                <td width="80%">
+                                    <asp:TextBox ID="Textbox9" runat="server" Columns="110" CssClass="form_txt" MaxLength="300"></asp:TextBox></td>
+                            </tr>
+                            <tr>
+                                <td align="right" width="20%">
+                                    <span class="t">後端管理路徑 AdminPath</span></td>
+                                <td width="80%">
+                                    <asp:TextBox ID="Textbox10" runat="server" Columns="110" CssClass="form_txt" MaxLength="300"></asp:TextBox></td>
+                            </tr>
+                            <tr>
+                                <td align="right" width="20%">
+                                    <span class="t">錯誤記錄檔路徑 ErrorPath</span></td>
+                                <td width="80%">
+                                    <asp:TextBox ID="Textbox11" runat="server" Columns="110" CssClass="form_txt" MaxLength="300"></asp:TextBox></td>
+                            </tr>
+                            <tr>
+                                <td align="right" width="20%">
+                                    <span class="t">一般檔案上傳路徑 UploadPath</span></td>
+                                <td width="80%">
+                                    <asp:TextBox ID="Textbox12" runat="server" Columns="110" CssClass="form_txt" MaxLength="300"></asp:TextBox></td>
+                            </tr>
+                            <tr>
+                                <td align="right" width="20%">
+                                    <span class="t">PhotoGallery上傳路徑 PhotoGalleryPath</span></td>
+                                <td width="80%">
+                                    <asp:TextBox ID="Textbox13" runat="server" Columns="110" CssClass="form_txt" MaxLength="300"></asp:TextBox>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td align="right" width="20%">
+                                    <span class="t">KM檔案存放路徑 KmXmlPath</span></td>
+                                <td width="80%">
+                                    <asp:TextBox ID="Textbox14" runat="server" Columns="110" CssClass="form_txt" MaxLength="300"></asp:TextBox>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td align="right" width="20%">
+                                    <span class="t">龍捲風程式路徑 TornadoPath</span>&nbsp;</td>
+                                <td width="80%">
+                                    <asp:TextBox ID="Textbox15" runat="server" Columns="110" CssClass="form_txt" MaxLength="300"></asp:TextBox>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td align="right" width="20%">
+                                    SuperAdmin</td>
+                                <td width="80%">
+                                    <asp:TextBox ID="Textbox16" runat="server" Columns="110" CssClass="form_txt" MaxLength="300"></asp:TextBox></td>
+                            </tr>
+                            <tr>
+                                <td align="right" width="20%">
+                                    系統反應與回覆信箱FeedbackMailAccount</td>
+                                <td width="80%">
+                                    <asp:TextBox ID="Textbox17" runat="server" CssClass="form_txt" Columns="110" MaxLength="300"></asp:TextBox></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+</asp:Content>

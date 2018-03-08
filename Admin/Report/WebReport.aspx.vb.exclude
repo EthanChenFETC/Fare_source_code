@@ -1,0 +1,200 @@
+﻿Imports System.Xml
+Imports System.IO
+Imports System.Data
+Imports System.Data.SqlClient
+
+''' <summary>
+''' 公布欄-新增及管理公告
+''' </summary>
+''' <remarks></remarks>
+Partial Class Intranet_WebReport
+    Inherits PageBase
+
+    ''' <summary>
+    ''' 頁面讀取完成事件
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Protected Sub Page_Load1(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        If Not IsPostBack Then
+            '由首頁直接連進來檢視詳細內容
+            If Session("ScheduleViewItem") IsNot Nothing Then
+                Dim Key As Integer = CInt(Session("ScheduleViewItem"))
+                Session("ScheduleViewItem") = Nothing
+            End If
+            doSetPublishDateRange()
+            BuildSiteTree()
+            'Me.GridView1.DataBind()
+        End If
+    End Sub
+#Region "上方功能區塊"
+
+    ''' <summary>
+    ''' 初始化公告日期區間
+    ''' </summary>
+    ''' <remarks></remarks>
+    Private Sub doSetPublishDateRange()
+        Dim sd As Date = Date.Today.AddMonths(-6)
+        Dim ed As Date = Date.Today.AddMonths(1)
+        Me.CalendarPopupPublishDate1.SelectedDate = sd
+        Me.CalendarPopupPublishDate2.SelectedDate = ed
+    End Sub
+
+    ''' <summary>
+    ''' 清除搜尋條件
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Protected Sub btnShowAll_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnShowAll.Click
+        'Me.txt_Subject.Text = ""
+    End Sub
+    ''' <summary>
+    ''' 取得樹狀選單，有複雜的過濾條件
+    ''' </summary>
+    ''' <remarks></remarks>
+    Private Sub BuildSiteTree()
+
+        '取得樹狀資料
+        Using dt As DataTable = ClassDB.RunReturnDataTable("SELECT NodeId, ParentNodeId, Text, SuperAdmin, NavigateUrl, PublishType, NodeLevel, ImageUrl, AllNodeOrder FROM AdminMenu ORDER BY AllNodeOrder")
+
+            Me.ddlSiteMap.Items.Clear()
+            Me.ddlSiteMap.Items.Add(New ListItem("請選擇單元", "0"))
+            '抓出來全球資訊網的功能項目
+            Dim startorder As Integer = -1
+            Dim endorder As Integer = -1
+            Using dr As SqlDataReader = ClassDB.GetDataReader("Select AllNodeOrder, Text from AdminMenu where parentnodeid = 0 order by allnodeorder")
+                Try
+                    While dr.Read
+                        If Not IsDBNull(dr("Text")) And dr("text").ToString.IndexOf("全球資訊網") > -1 Then
+                            startorder = CInt(dr("AllNodeOrder")).ToString
+                            Continue While
+                        End If
+                        If startorder > -1 Then
+                            endorder = CInt(dr("AllNodeOrder")).ToString
+                            Exit While
+                        End If
+                    End While
+
+                Catch ex As Exception
+                Finally
+                End Try
+            End Using
+            If startorder < 0 Or endorder < 0 Then
+                Exit Sub
+            End If
+
+            For i As Integer = 0 To dt.Rows.Count - 1
+                Dim drow As DataRow = dt.Rows(i)
+                If drow("AllNodeOrder") > startorder And drow("AllNodeOrder") < endorder Then
+                    Dim Text As String = ReturnSpace(CInt(drow("NodeLevel")) - 3) & drow("Text") 'RemoveXSS(drow("Text").ToString)
+                    Text = HttpUtility.HtmlEncode(Text)
+                    Dim NodeID As String = drow("NodeID")
+                    NodeID = CInt(NodeID).ToString
+                    Me.ddlSiteMap.Items.Add(New ListItem(Text, NodeID.ToString))
+                End If
+            Next
+        End Using
+    End Sub
+
+    Private Function ReturnSpace(ByVal i As Integer) As String
+        Dim j As Integer
+        Dim SpaceString As String = ""
+        For j = 0 To i
+            SpaceString += "　"
+        Next
+        'SpaceString += "-"
+        Return SpaceString
+    End Function
+
+    Protected Sub ddl_ScheduleDep_DataBound(ByVal sender As Object, ByVal e As System.EventArgs) Handles ddl_ScheduleDep.DataBound
+        If Not IsPostBack Then
+            ddl_ScheduleDep.SelectedValue = Session("DepartmentID").ToString
+        End If
+    End Sub
+
+
+#End Region
+
+
+#Region "公告清單-GridView"
+    ''' <summary>
+    ''' 資料來源物件-設定日期區間
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Protected Sub sds_AuditLog_List_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles sds_AuditLog_List.Load
+        'If GetUserPermission() > 1 Then '20080813 應該大家都要可以吧
+        '權限大於1的有上下架日期選擇
+        Me.sds_AuditLog_List.SelectParameters("StartDate").DefaultValue = Me.CalendarPopupPublishDate1.SelectedDate.ToString("yyyyMMdd")
+        Me.sds_AuditLog_List.SelectParameters("EndDate").DefaultValue = Me.CalendarPopupPublishDate2.SelectedDate.ToString("yyyyMMdd")
+    End Sub
+
+    ''' <summary>
+    ''' 設定GridView清單顯示樣式
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Protected Sub GridView1_DataBound(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DataBound
+        GridViewPageInfo.GetGridViewInfo(Me.GridView1, Me, Me.sds_AuditLog_List)
+    End Sub
+
+    Protected Sub GridView1_RowDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GridView1.RowDataBound
+        If e.Row.RowType = DataControlRowType.DataRow Then
+            If e.Row.RowState = 0 OrElse e.Row.RowState = 1 OrElse e.Row.RowState = 2 OrElse e.Row.RowState = 3 Then
+                Dim dr As DataRowView = e.Row.DataItem
+
+                If (e.Row.DataItem("ActionCode").ToString = "1" Or e.Row.DataItem("ActionCode").ToString = "2") And e.Row.DataItem("ResultCode").ToString = 0 Then
+                    e.Row.ToolTip = e.Row.DataItem("ProcessName").ToString & "-" & e.Row.DataItem("ActionProcess").ToString
+                Else
+                    e.Row.ToolTip = "無法連結"
+                    e.Row.Enabled = False
+                End If
+                Dim lb_Subject As LinkButton = CType(e.Row.FindControl("lb_Subject"), LinkButton)
+                Dim lb_ProcessName As LinkButton = CType(e.Row.FindControl("lb_ProcessName"), LinkButton)
+                lb_Subject.CommandArgument = dr("ActionCode").ToString & "," & dr("ResultCode").ToString
+                lb_Subject.Text = System.Web.HttpUtility.HtmlEncode(dr("Subject"))
+                lb_ProcessName.CommandArgument = dr("ActionCode").ToString & "," & dr("ResultCode").ToString
+                lb_ProcessName.Text = System.Web.HttpUtility.HtmlEncode(dr("ProcessName"))
+
+            End If
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' 公告清單中選取公告進行編輯
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Protected Sub GridView1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.SelectedIndexChanged
+        Dim LogID As Integer = Me.GridView1.SelectedDataKey.Value
+        Me.ViewState.Add("1", LogID)
+        ReadBackContent_View(LogID)
+    End Sub
+    Private Sub ReadBackContent_View(ByVal key As Integer)
+        Dim Url As String = ""
+        Using Dr As SqlDataReader = ClassDB.GetDataReaderParam("Select AdminPath, AdminPara, ActionCode, Results from AuditLog where LogID = @LogID", New SqlParameter("@LogID", key.ToString))
+            Try
+                If Dr.Read Then
+                    Session("AuditPara") = Dr("AdminPara").ToString
+                    Url = RemoveXSS(Dr("AdminPath").ToString)
+                End If
+            Catch ex As Exception
+            Finally
+
+            End Try
+        End Using
+        If Url.Length > 0 Then
+            If Url.IndexOf("~/") = 0 Then
+                Response.Redirect(Url)
+            End If
+        End If
+    End Sub
+#End Region
+
+End Class
+

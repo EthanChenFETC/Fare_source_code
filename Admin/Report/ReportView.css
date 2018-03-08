@@ -1,0 +1,160 @@
+﻿.PanelControl
+{
+ width:19cm;
+ margin:auto;   
+}
+.PanelOutline
+{
+ width:19cm;
+ margin:auto;   
+}
+.Gv2{
+	border: 1px solid #a5bce1;
+	margin-top: 10px;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+.Gv2 a:link, .Gv a:visited {
+	color: #6699CC;
+	text-decoration: none;
+}
+.Gv2 a:hover{
+	color: #48D5C4;
+}
+.Gv{
+	border: 1px solid #a5bce1;
+	margin-top: 10px;
+	width: 19cm;
+	margin-left: auto;
+	margin-right: auto;
+}
+.Gv a:link, .Gv a:visited {
+	color: #6699CC;
+	text-decoration: none;
+}
+.Gv a:hover{
+	color: #48D5C4;
+}
+.GvPager
+{
+    display:none;
+	
+}
+.GvPager a:before, .GvPager span:before {
+	content: "P."
+}
+.GvPager a:link, .GvPager a:visited {
+	margin: 0px;
+	padding: 1px 3px;
+	background-color:#EFEFEF;
+	color:#666666;
+	height: 10px;
+	width: 12px;
+}
+.GvPager a:hover {
+	margin: 0px;
+	padding: 1px 3px;
+	background-color:#ff0000;
+	color:#ffffff;
+	height: 10px;
+	width: 12px;
+}
+.GvPager span {
+	margin: 0px;
+	padding: 1px 3px;
+	background-color:#D2F7FF;
+	color:#0066CC;
+	height: 10px;
+	width: 12px;
+}
+.GvPager .PageInfo {
+	margin: 1px;
+	padding: 1px 3px;
+	background-color:#efefef;
+	color:#666666;
+	height: 10px;
+	width: 99%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+.GvHeader{
+	border-top: 1px solid #fff;
+	background-color:#8CBCEC;
+	height: 25px;
+	color: #000000;
+	text-align: left;
+}
+.GvHeader a{
+	color: #666666;
+}
+
+.GvAltItem{
+	background-color:#F6F6F6;
+	height: 25px;
+	color: #666666;
+	text-align: left;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+.GvAltItem:hover {
+	background-color:#EEF9FF;
+	color: #222222;
+}
+.GvItem{
+	padding-left:5px;
+	background-color:#ffffff;
+	height: 25px;
+	color: #666666;
+	text-align: left;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+.GvItem:hover {
+	background-color:#EEF9FF;
+	color: #222222;
+}
+.GvFooter{
+	background-color:#ececec;
+	height: 28px;
+	color: #333333;
+	text-align: left;
+	text-indent: 5px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.TableTitle
+{
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size:large;
+    font-weight:bolder;
+    text-align:center;
+    margin-top:12px;
+}
+
+.TableSubject
+{
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size:medium;
+    text-align:center;
+}
+
+.TotalCountRow
+{
+    font-weight:bold;
+}
+
+
+.PrintInfo
+{
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size:xx-small;
+  margin-top: 6px; 
+  text-align:left;
+}
+.PrintInfoBreak
+{
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size:xx-small;
+  margin-top: 6px; 
+  text-align:left;
+}

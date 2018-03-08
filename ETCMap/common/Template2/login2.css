@@ -1,0 +1,43 @@
+body{
+	background-image: url(images/login2_bg.gif);
+	background-repeat: repeat-x;
+	padding:0;
+
+
+}
+
+.Content {
+	height: 449px;
+	width: 424px;
+	position: relative;
+	padding:0;
+	margin-top:-15px;
+	margin-left:auto;
+	margin-right:auto;
+	background-image: url(images/login2_bg_pic.gif);
+	background-repeat: no-repeat;	
+}
+
+.InputArea {
+	margin-top:260px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+
+.login_txt {
+	width: 200px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	text-align: center;
+}
+
+.login_btn {
+	border:#993300 solid 1px;
+	background:#FFCC33;
+	color:#555;
+	width:100px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	text-align: center;
+	height:22px;
+}

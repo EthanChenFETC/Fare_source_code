@@ -1,0 +1,214 @@
+﻿Imports System.Data
+Imports System.Data.SqlClient
+Partial Class Fare_Calculator_Opinion
+    Inherits PageBase
+    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        If Not IsPostBack Then
+            Me.txtSdate.Text = "2012/10/01"
+            Me.txtEdate.Text = Date.Now.ToString("yyyy/MM/dd")
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' 清單總量、頁數資料
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Protected Sub GridView1_DataBound(ByVal sender As Object, ByVal e As System.EventArgs) Handles GridView1.DataBound
+        GridViewPageInfo.GetGridViewInfo(Me.GridView1, Me.Page, Me.SDS_Opinion_List)
+    End Sub
+
+#Region "資料來源"
+
+    ''' <summary>
+    ''' Reset the select command for more filter
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Protected Sub SDS_Opinion_List_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles SDS_Opinion_List.Load
+        'Dim Strsql As String = Me.SDS_Opinion_List.SelectCommand
+        'Strsql = ""
+        'If txtSdate.Text <> "" Then
+        '    Strsql = Strsql & " and  datediff(d,UpdateDateTime,'" & txtSdate.Text & "')<=0"
+        'End If
+        'If txtEdate.Text <> "" Then
+        '    Strsql = Strsql & " and  datediff(d,UpdateDateTime,'" & txtEdate.Text & "')>=0"
+        'End If
+        'Strsql = Strsql & "order by PostDateTime desc"
+        'Me.SDS_Opinion_List.SelectCommand = Strsql
+        'Me.SDS_Opinion_List.SelectCommandType = SqlDataSourceCommandType.Text
+    End Sub
+#End Region
+
+    Protected Sub btnExcel_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnExcel.Click
+        Dim oResponse As HttpResponse
+        Dim oStringWriter As System.IO.StringWriter
+        Dim oHtmlWriter As System.Web.UI.HtmlTextWriter
+        Dim Encoding As Encoding = System.Text.Encoding.UTF8
+        Dim sText As String
+        oResponse = HttpContext.Current.Response
+        sText = ExportExcel()
+        oResponse.Write(sText)
+        oResponse.AddHeader("content-disposition", "attachment;filename=OpinionList" & DateTime.Now.ToString("yyyyMMddhhmm") & ".xls")
+        Response.ContentType = "application/vnd.ms-excel"
+        oResponse.Charset = Encoding.WebName
+
+        oStringWriter = New System.IO.StringWriter()
+        oHtmlWriter = New System.Web.UI.HtmlTextWriter(oStringWriter)
+        oResponse.Write(oStringWriter.ToString())
+        oResponse.End()
+
+    End Sub
+    Function ExportExcel() As String
+        Dim Rvalue As String
+        Rvalue = "<html xmlns:o=""urn:schemas-microsoft-com:office:office""" & vbCrLf
+        Rvalue += "xmlns:x = ""urn:schemas-microsoft-com:office:excel""" & vbCrLf
+        Rvalue += "xmlns = ""http://www.w3.org/TR/REC-html40"" > " & vbCrLf
+        Rvalue += "<head>" & vbCrLf
+        Rvalue += "<meta http-equiv=""Content-Language"" content=""zh-tw"">" & vbCrLf
+        Rvalue += "<meta http-equiv=""Content-Type"" content=""text/html; charset=utf-8"">" & vbCrLf
+        Rvalue += "<meta name=ProgId content=Excel.Sheet>" & vbCrLf
+        Rvalue += "<meta name=Generator content=""Microsoft Excel 10"">" & vbCrLf
+        Rvalue += "<title>意見反映清單</title>" & vbCrLf
+        Rvalue += "<!--[if gte mso 9]><xml>" & vbCrLf
+        Rvalue += " <o:DocumentProperties>" & vbCrLf
+        Rvalue += "  <o:LastAuthor>David</o:LastAuthor>" & vbCrLf
+        Rvalue += "  <o:LastSaved>2006-10-11T16:45:53Z</o:LastSaved>" & vbCrLf
+        Rvalue += "  <o:Version>10.6626</o:Version>" & vbCrLf
+        Rvalue += " </o:DocumentProperties>" & vbCrLf
+        Rvalue += "</xml><![endif]-->" & vbCrLf
+        Rvalue += "<style type=""text/css"">" & vbCrLf
+        Rvalue += "<!--table" & vbCrLf
+        Rvalue += "	{mso-displayed-decimal-separator:""\."";" & vbCrLf
+        Rvalue += "	mso-displayed-thousand-separator:""\,"";}" & vbCrLf
+        Rvalue += "@page" & vbCrLf
+        Rvalue += "	{margin:1.0in .75in 1.0in .75in;" & vbCrLf
+        Rvalue += "	mso-header-margin:.5in;" & vbCrLf
+        Rvalue += "	mso-footer-margin:.5in;}" & vbCrLf
+        Rvalue += "tr" & vbCrLf
+        Rvalue += "	{mso-height-source:auto;" & vbCrLf
+        Rvalue += "	mso-ruby-visibility:none;}" & vbCrLf
+        Rvalue += "col" & vbCrLf
+        Rvalue += "	{mso-width-source:auto;" & vbCrLf
+        Rvalue += "	mso-ruby-visibility:none;}" & vbCrLf
+        Rvalue += "br" & vbCrLf
+        Rvalue += "	{mso-data-placement:same-cell;}" & vbCrLf
+        Rvalue += ".style0" & vbCrLf
+        Rvalue += "	{mso-number-format:General;" & vbCrLf
+        Rvalue += "	text-align:general;" & vbCrLf
+        Rvalue += "	vertical-align:middle;" & vbCrLf
+        Rvalue += "	white-space:nowrap;" & vbCrLf
+        Rvalue += "	mso-rotate:0;" & vbCrLf
+        Rvalue += "	mso-background-source:auto;" & vbCrLf
+        Rvalue += "	mso-pattern:auto;" & vbCrLf
+        Rvalue += "	color:windowtext;" & vbCrLf
+        Rvalue += "	font-size:12.0pt;" & vbCrLf
+        Rvalue += "	font-weight:400;" & vbCrLf
+        Rvalue += "	font-style:normal;" & vbCrLf
+        Rvalue += "	text-decoration:none;" & vbCrLf
+        Rvalue += "	font-family:新細明體, serif;" & vbCrLf
+        Rvalue += "	mso-font-charset:136;" & vbCrLf
+        Rvalue += "	border:none;" & vbCrLf
+        Rvalue += "	mso-protection:locked visible;" & vbCrLf
+        Rvalue += "	mso-style-name:一般;" & vbCrLf
+        Rvalue += "	mso-style-id:0;}" & vbCrLf
+        Rvalue += ".xl24" & vbCrLf
+        Rvalue += "	{mso-style-parent:style0;" & vbCrLf
+        Rvalue += "	vertical-align:bottom;}" & vbCrLf
+        Rvalue += "ruby" & vbCrLf
+        Rvalue += "	{ruby-align:left;}" & vbCrLf
+        Rvalue += "rt" & vbCrLf
+        Rvalue += "	{color:windowtext;" & vbCrLf
+        Rvalue += "	font-size:9.0pt;" & vbCrLf
+        Rvalue += "	font-weight:400;" & vbCrLf
+        Rvalue += "	font-style:normal;" & vbCrLf
+        Rvalue += "	text-decoration:none;" & vbCrLf
+        Rvalue += "	font-family:新細明體, serif;" & vbCrLf
+        Rvalue += "	mso-font-charset:136;" & vbCrLf
+        Rvalue += "	mso-char-type:none;" & vbCrLf
+        Rvalue += "	display:none;}" & vbCrLf
+        Rvalue += "-->" & vbCrLf
+        Rvalue += "</style>" & vbCrLf
+        Rvalue += "<!--[if gte mso 9]><xml>" & vbCrLf
+        Rvalue += " <x:ExcelWorkbook>" & vbCrLf
+        Rvalue += "  <x:ExcelWorksheets>" & vbCrLf
+        Rvalue += "   <x:ExcelWorksheet>" & vbCrLf
+        Rvalue += "    <x:Name>轉寄詳細清單</x:Name>" & vbCrLf
+        Rvalue += "    <x:WorksheetOptions>" & vbCrLf
+        Rvalue += "     <x:DefaultRowHeight>330</x:DefaultRowHeight>" & vbCrLf
+        Rvalue += "     <x:Selected/>" & vbCrLf
+        Rvalue += "     <x:Panes>" & vbCrLf
+        Rvalue += "      <x:Pane>" & vbCrLf
+        Rvalue += "       <x:Number>3</x:Number>" & vbCrLf
+        Rvalue += "       <x:ActiveRow>4</x:ActiveRow>" & vbCrLf
+        Rvalue += "       <x:ActiveCol>5</x:ActiveCol>" & vbCrLf
+        Rvalue += "      </x:Pane>" & vbCrLf
+        Rvalue += "     </x:Panes>" & vbCrLf
+        Rvalue += "     <x:ProtectContents>False</x:ProtectContents>" & vbCrLf
+        Rvalue += "     <x:ProtectObjects>False</x:ProtectObjects>" & vbCrLf
+        Rvalue += "     <x:ProtectScenarios>False</x:ProtectScenarios>" & vbCrLf
+        Rvalue += "    </x:WorksheetOptions>" & vbCrLf
+        Rvalue += "   </x:ExcelWorksheet>" & vbCrLf
+        Rvalue += "  </x:ExcelWorksheets>" & vbCrLf
+        Rvalue += "  <x:WindowHeight>9000</x:WindowHeight>" & vbCrLf
+        Rvalue += "  <x:WindowWidth>18180</x:WindowWidth>" & vbCrLf
+        Rvalue += "  <x:WindowTopX>480</x:WindowTopX>" & vbCrLf
+        Rvalue += "  <x:WindowTopY>30</x:WindowTopY>" & vbCrLf
+        Rvalue += "  <x:ProtectStructure>False</x:ProtectStructure>" & vbCrLf
+        Rvalue += "  <x:ProtectWindows>False</x:ProtectWindows>" & vbCrLf
+        Rvalue += " </x:ExcelWorkbook>" & vbCrLf
+        Rvalue += "</xml><![endif]-->    " & vbCrLf
+        Rvalue += "</head>" & vbCrLf
+        Rvalue += "<body>" & vbCrLf
+        Rvalue += "<table width=""275"" border=""1"">" & vbCrLf
+        Rvalue += "<tr>" & vbCrLf
+        'Rvalue += "<td vAlign=""top"" width=""75""><b>編號</b></td>" & vbCrLf
+        Rvalue += "<td vAlign=""top"" align=""middle"" width=""100""><b>姓名</b></td>" & vbCrLf
+        Rvalue += "<td vAlign=""top"" align=""middle"" width=""100""><b>Email</b></td>" & vbCrLf
+        Rvalue += "<td vAlign=""top"" align=""middle"" width=""100""><b>電話</b></td>" & vbCrLf
+        Rvalue += "<td vAlign=""top"" align=""middle"" width=""100""><b>意見內容</b></td>" & vbCrLf
+        Rvalue += "<td vAlign=""top"" align=""middle"" width=""100""><b>反映日期</b></td>" & vbCrLf
+        Rvalue += "</tr>" & vbCrLf
+        Dim sdata As String = IIf(Me.txtSdate.Text Is Nothing, "'2012/01/01'", IIf(Me.txtSdate.Text.Length = 0, "'2012/01/01'", "'" & Me.txtSdate.Text.Trim & "'"))
+        Dim edata As String = IIf(Me.txtEdate.Text Is Nothing, "'3000/01/01'", IIf(Me.txtEdate.Text.Length = 0, "'3000/01/01'", "'" & Me.txtEdate.Text.Trim & "'"))
+        txtSdate.Text = sdata
+        txtEdate.Text = edata
+        Dim dt As DataTable = CType(Me.SDS_Opinion_List.Select(New DataSourceSelectArguments), DataView).Table
+        For i As Integer = 0 To dt.Rows.Count - 1
+            Dim dr As DataRow = dt.Rows(i)
+            Rvalue += "<tr>" & vbCrLf
+            'Rvalue += "<td vAlign=""top"">" & dr("UID").ToString & "</td>" & vbCrLf
+            Rvalue += "<td vAlign=""top"">" & dr("FullName").ToString & "</td>" & vbCrLf
+            Rvalue += "<td vAlign=""top"">" & dr("Email").ToString & "</td>" & vbCrLf
+            Rvalue += "<td vAlign=""top"">" & dr("Phone").ToString & "</td>" & vbCrLf
+            Rvalue += "<td vAlign=""top"">" & dr("Contents").ToString & "</td>" & vbCrLf
+            Rvalue += "<td vAlign=""top"">" & CDate(dr("PostDateTime")).ToString() & "</td>" & vbCrLf
+            Rvalue += "</tr>" & vbCrLf
+        Next
+        Rvalue += "</table>"
+        Rvalue += "</body>" & vbCrLf
+        Rvalue += "</html>" & vbCrLf
+        Return Rvalue
+    End Function
+
+    Protected Sub btnSearch_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSearch.Click
+        If txtSdate.Text Is Nothing Then
+            txtSdate.Text = "2012/10/01"
+        ElseIf txtSdate.Text.Length = 0 Then
+            txtSdate.Text = "2012/10/01"
+        End If
+        If txtEdate.Text Is Nothing Then
+            txtEdate.Text = "2013/12/31"
+        ElseIf txtEdate.Text.Length = 0 Then
+            txtEdate.Text = "2013/12/31"
+        End If
+        Dim tdate As String = txtSdate.Text
+        If txtSdate.Text > txtEdate.Text Then
+            txtSdate.Text = txtEdate.Text
+            txtEdate.Text = tdate
+        End If
+        Me.GridView1.DataBind()
+    End Sub
+End Class

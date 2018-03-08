@@ -1,0 +1,107 @@
+<html>
+<head>
+<!--
+This file retrieved from the Javascript Archives
+http://javascript.js-x.com
+1000s of free ready to use scripts, tutorials, forums.
+Author: JS-Examples - http://www.js-examples.com/
+-->
+
+</head>
+<body>
+<script type=text/javascript>
+var isIE5 = document.all;
+var isIE4 = document.all; // who is using this anyways?
+var isNet4 = !isIE5; // just assume... i know .. i know... ;-)
+function getWindowWidth() {
+if (isNet4) return(window.innerWidth);
+if (isIE4) return(400);
+if (isIE5) return(document.body.clientWidth);
+return(-1);}
+
+function getWindowHeight() {
+if (isNet4) return(window.innerHeight);
+if (isIE4) return(document.body.clientHeight);
+return(-1);}
+
+function getPageWidth() {
+if (isNet4) return(document.width);
+if (isIE4) return(document.body.scrollWidth);
+return(-1);}
+
+function getPageHeight() {
+if (isNet4) return(document.height);
+if (isIE4) return(document.body.scrollHeight);
+return(-1);}
+
+function getPageScrollX() {
+if (isNet4) return(window.pageXOffset);
+if (isIE4) return(100);
+if (isIE5) return(document.body.scrollLeft);
+return(-1);}
+
+function getPageScrollY() {
+if (isNet4) return(window.pageYOffset);
+if (isIE4) return(document.body.scrollTop);
+return(-1);}
+
+function getMaxHeight() {
+var max = Math.max;
+ i = max(getPageHeight(), getWindowHeight());
+return(i);
+}
+document.write("WindowWidth="+getWindowWidth()+"<BR>")
+document.write("WindowHeight="+getWindowHeight()+"<BR>")
+document.write("PageWidth="+getPageWidth()+"<BR>")
+document.write("PageHeight="+getPageHeight()+"<BR>")
+document.write("PageScrollX="+getPageScrollX()+"<BR>")
+document.write("PageScollY="+getPageScrollY()+"<BR>")
+document.write("MaxHeight="+getMaxHeight()+"<BR>")
+</script>
+<BR><center>
+  <p><a title='Javascript' href='http://javascript.js-x.com'>javascript.js-x.com</a><br>
+  </p>
+  <p>&nbsp;</p>
+  <p>dsdsd</p>
+  <p>sdsdss</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>dsdsd</p>
+</center>
+ 
+</body>
+</html>

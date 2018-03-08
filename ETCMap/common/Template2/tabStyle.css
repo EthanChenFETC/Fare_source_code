@@ -1,0 +1,59 @@
+.TopGroup
+{
+	z-index:99;
+	position:absolute;
+	top: 27px;
+	left:3px;
+	height: 10px;
+	margin-bottom:0;
+}
+
+.DefaultTab 
+{
+  color:black; 
+  background-image: url(images/tab_bg.gif);
+  font-family:MS Sans Serif, Verdana; 
+  font-size:10px; 
+  cursor:default;
+}
+
+.DefaultTabHover 
+{
+  color:black; 
+  background-image: url(images/hover_tab_bg.gif);
+  font-family:MS Sans Serif, Verdana; 
+  font-size:10px; 
+  cursor:default;
+}
+
+.SelectedTab 
+{
+  color:black; 
+  background-image: url(images/selected_tab_bg.gif);
+  font-family:MS Sans Serif, Verdana; 
+  font-size:10px; 
+  cursor:default;
+}
+
+.MultiPage
+{
+  background-color:White;
+  border: 1px solid #919B9C;
+  width:487px;
+  height:250px;
+  position:relative;
+  top:-2px;
+  z-index:98;
+}
+/*
+.Blockbody{
+  background-color:White;
+  border: 1px solid #919B9C;
+  width:99%;
+  position:relative;
+  top:-16px;
+  z-index:98;
+}*/
+#UpdatePanel2{
+	margin-top: -10px;
+}

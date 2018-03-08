@@ -1,0 +1,119 @@
+﻿Imports System.Xml
+Imports System.IO
+
+Partial Class SystemDesign_ConfigurationSetting
+    'Inherits System.Web.UI.Page
+    Inherits PageBase
+
+    Private Const dcNamespace As String = "http://www.w3.org/2001/XMLSchema-instance"
+    Private Const dcNamespace2 As String = "http://www.w3.org/2001/XMLSchema"
+    'Dim ConfigDir As String = ConfigurationProviders.ConfigurationDir
+
+
+    '//讀取設定檔資料 GetData From ConfigurationProviders
+    Protected Sub Button1_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Button1.Click
+        ConfigurationFile = ConfigurationProviders.ConfigurationDir & "/" & Me.txt_ConfigFile.Text
+
+        Me.Textbox1.Text = GetAppSetting(ConfigurationProviders.Config_SiteID)
+        Me.Textbox2.Text = GetAppSetting(ConfigurationProviders.Config_SiteDomain)
+        Me.Textbox3.Text = GetAppSetting(ConfigurationProviders.Config_SiteName)
+        Me.Textbox4.Text = GetAppSetting(ConfigurationProviders.Config_SiteLang)
+        Me.Textbox5.Text = GetAppSetting(ConfigurationProviders.Config_SiteAdminDomain)
+        Me.Textbox6.Text = GetAppSetting(ConfigurationProviders.Config_CnnString)
+        Me.Textbox7.Text = GetAppSetting(ConfigurationProviders.Config_MailServer)
+        Me.Textbox8.Text = GetAppSetting(ConfigurationProviders.Config_MainMailAccount)
+        Me.Textbox9.Text = GetAppSetting(ConfigurationProviders.Config_ePaperMailAccount)
+        Me.Textbox10.Text = GetAppSetting(ConfigurationProviders.Config_AdminPath)
+        Me.Textbox11.Text = GetAppSetting(ConfigurationProviders.Config_ErrorPath)
+        Me.Textbox12.Text = GetAppSetting(ConfigurationProviders.Config_UploadPath)
+        Me.Textbox13.Text = GetAppSetting(ConfigurationProviders.Config_PhotoGalleryPath)
+        Me.Textbox14.Text = GetAppSetting(ConfigurationProviders.Config_KmXmlPath)
+        Me.Textbox15.Text = GetAppSetting(ConfigurationProviders.Config_TornadoPath)
+        Me.Textbox16.Text = GetAppSetting(ConfigurationProviders.Config_SuperAdmin)
+        Me.Textbox17.Text = GetAppSetting(ConfigurationProviders.Config_FeedbackMailAccount)
+
+    End Sub
+
+    Protected Sub btnAddNew_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnAddNew.Click
+        Dim SecurityBase64 As New ClassSecurity.SecurityBase64
+
+        Dim ConfigDir As String = Server.MapPath(ConfigurationProviders.ConfigurationDir)
+        Dim ConfigFile As String = Server.MapPath(ConfigurationProviders.ConfigurationFile)
+        doBackupFile(Me.txt_ConfigFile.Text.Replace("*", "").Replace(";", ""))
+
+
+        Dim settings As New XmlWriterSettings()
+        settings.Indent = True
+        settings.IndentChars = "    "
+        Using writer As XmlWriter = XmlWriter.Create(ConfigFile, settings)
+            writer.WriteStartElement("Configuration")
+            writer.WriteAttributeString("xmlns", "xsi", Nothing, dcNamespace)
+            writer.WriteStartElement("SystemConfig")
+
+            writer.WriteElementString(Config_SiteID, SecurityBase64.doEncode(Me.Textbox1.Text))
+            writer.WriteElementString(Config_SiteDomain, SecurityBase64.doEncode(Me.Textbox2.Text))
+            writer.WriteElementString(Config_SiteName, SecurityBase64.doEncode(Me.Textbox3.Text))
+            writer.WriteElementString(Config_SiteLang, SecurityBase64.doEncode(Me.Textbox4.Text))
+            writer.WriteElementString(Config_SiteAdminDomain, SecurityBase64.doEncode(Me.Textbox5.Text))
+            writer.WriteElementString(Config_CnnString, SecurityBase64.doEncode(Me.Textbox6.Text))
+            writer.WriteElementString(Config_MailServer, SecurityBase64.doEncode(Me.Textbox7.Text))
+            writer.WriteElementString(Config_MainMailAccount, SecurityBase64.doEncode(Me.Textbox8.Text))
+            writer.WriteElementString(Config_ePaperMailAccount, SecurityBase64.doEncode(Me.Textbox9.Text))
+            writer.WriteElementString(Config_AdminPath, SecurityBase64.doEncode(Me.Textbox10.Text))
+            writer.WriteElementString(Config_ErrorPath, SecurityBase64.doEncode(Me.Textbox11.Text))
+            writer.WriteElementString(Config_UploadPath, SecurityBase64.doEncode(Me.Textbox12.Text))
+            writer.WriteElementString(Config_PhotoGalleryPath, SecurityBase64.doEncode(Me.Textbox13.Text))
+            writer.WriteElementString(Config_KmXmlPath, SecurityBase64.doEncode(Me.Textbox14.Text))
+            writer.WriteElementString(Config_TornadoPath, SecurityBase64.doEncode(Me.Textbox15.Text))
+            writer.WriteElementString(Config_SuperAdmin, SecurityBase64.doEncode(Me.Textbox16.Text))
+            writer.WriteElementString(Config_FeedbackMailAccount, SecurityBase64.doEncode(Me.Textbox17.Text))
+
+            writer.WriteEndElement()
+            writer.WriteEndElement()
+            writer.Flush()
+
+        End Using
+
+
+        Cache.Remove("AppSetting_" & Config_ErrorPath)
+        SecurityBase64 = Nothing
+
+        Me.lblMessage_Add.Text = "系統訊息：資料已更新！"
+    End Sub
+
+    Private Sub doBackupFile(ByVal ConfigFile As String)
+        Dim NowString As String = Now.ToString("yyyyMMdd-HHmmff", System.Globalization.DateTimeFormatInfo.InvariantInfo)
+        Dim ConfigDir As String = Server.MapPath(ConfigurationProviders.ConfigurationDir)   '取得設定檔目錄
+        If Not ConfigDir.EndsWith("/") And Not ConfigDir.EndsWith("\") Then
+            ConfigDir = ConfigDir & Path.DirectorySeparatorChar.ToString()
+        End If
+
+        'Dim TheConfigFile As System.IO.File
+        'If File.Exists(Server.MapPath(ConfigurationProviders.ConfigurationFile)) Then
+        '    WriteLog("T", "File.Exists=>" & Server.MapPath(ConfigurationProviders.ConfigurationFile) & vbCrLf & ConfigDir & "Backup" & NowString & ConfigFile)
+        'End If
+        If Not File.Exists(ConfigDir & ConfigFile) Then Exit Sub
+
+        File.Copy(ConfigDir & ConfigFile.Replace("*", "").Replace(";", ""), ConfigDir & "Backup" & NowString & ConfigFile.Replace("*", "").Replace(";", ""))
+        File.Delete(ConfigDir & ConfigFile)
+
+        'TheConfigFile = Nothing
+    End Sub
+
+
+    Private Sub ReadXml()
+
+        Using FileStreamReader As StreamReader = File.OpenText(Server.MapPath("PublicationList.xml"))
+            Try
+                Response.Write(FileStreamReader.ReadToEnd())
+
+            Catch ex As Exception
+                Response.Write("Error in Reading file. Error is " & ex.ToString())
+                WriteErrLog(ex, Me)
+            Finally
+
+            End Try
+        End Using
+    End Sub
+
+End Class
